@@ -51,6 +51,7 @@ char pass[] = "incubator";
 #define RESERVOIR A0
 #define DHTTYPE DHT11
 #define WATER_ADD_LED 14 // D5
+#define VALVE_PIN 3 // RX
 
 // V1 - mode
 // V2 - auto
@@ -67,12 +68,14 @@ char pass[] = "incubator";
 // V15 - water tray (current pins)
 // V16 - water addition (current pins)
 
+// variables
 int customTemp;
 int customLight;
 int customBlue;
 int mode;     // 0 = custom, 1 = day, 2 = night, 3 = germinate
 int automate;
 int timerMode; // the mode the timer wants you to have
+int valve = 0; // corresponds to valve open or close
 
 int lastWaterAdd = 0; // if the water was being added in the last loop
 int reservoirVal = 0;
@@ -127,6 +130,7 @@ void sendSensor()
   Blynk.virtualWrite(V7, t);
 }
 
+// update mode according to time
 void updateTime() {
   int hr = hour();
   int min = minute();
@@ -213,11 +217,24 @@ void reservoirUpdate() {
   Serial.print("\n ");
 }
 
+// Open/close valve for tray
 void trayUpdate() {
   int waterVal = digitalRead(WATER_TRAY);
+  Serial.println("water val = " + String(waterVal));
   Blynk.virtualWrite(V15, waterVal);
+  if (waterVal == 0) {
+    digitalWrite(VALVE_PIN, HIGH);
+    valve = 1;
+    Serial.println("valve opened");
+    return;
+  }
+  // If waterval > 10 and the valve is currently open
+  if (valve == 1) {
+    digitalWrite(VALVE_PIN, LOW);
+    valve = 0;
+    Serial.println("valve closed");
+  }
 }
-
 
 void waterAdd() {
   int waterAddAnalog = 0;
@@ -256,6 +273,7 @@ void setup()
   pinMode(RESERVOIR, INPUT);
   pinMode(WATER_TRAY, INPUT);
   pinMode(WATER_ADD, INPUT);
+  pinMode(VALVE_PIN, OUTPUT);
 
   dht.begin();
   rtc.begin();
