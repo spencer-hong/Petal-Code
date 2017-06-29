@@ -36,17 +36,21 @@
 WidgetRTC rtc;
 
 // Go to the Project Settings (nut icon).
-char auth[] = "04908e6770cb4e959b967585b0351a24";
+char auth[] = "989e37df439141cc9fcfe2dbde95cee8";
 
-char ssid[] = "116.5 Heights Court";
-char pass[] = "courtcourtheights";
+char ssid[] = "Rev Member";
+char pass[] = "incubator";
 
-#define DHTPIN 2          // What digital pin we're connected to
-#define LED_PIN 15
-#define BLUE_PIN 13
-#define HEAT_PIN 5
-#define FAN_PIN 12
-#define DHTTYPE DHT22   // DHT 22, AM2302, AM2321
+#define DHTPIN 2  // D4
+#define LED_PIN 15  // D8
+#define BLUE_PIN 13 // D7
+#define HEAT_PIN 5  // D1
+#define FAN_PIN 12  // D6
+#define WATER_TRAY 4  // D2
+#define WATER_ADD 0 // D3
+#define RESERVOIR A0
+#define DHTTYPE DHT11
+#define WATER_ADD_LED 14 // D5
 
 // V1 - mode
 // V2 - auto
@@ -59,6 +63,9 @@ char pass[] = "courtcourtheights";
 // V9 - day timer
 // V10 - germination start
 // V11 - germination end
+// V14 - reservoir level (RESERVOIR)
+// V15 - water tray (current pins)
+// V16 - water addition (current pins)
 
 int customTemp;
 int customLight;
@@ -66,6 +73,10 @@ int customBlue;
 int mode;     // 0 = custom, 1 = day, 2 = night, 3 = germinate
 int automate;
 int timerMode; // the mode the timer wants you to have
+
+int lastWaterAdd = 0; // if the water was being added in the last loop
+int reservoirVal = 0;
+int sensorValue = 0;
 
 int nightHour;
 int nightMin;
@@ -188,6 +199,46 @@ void modeUpdate() {
   Blynk.virtualWrite(V1, mode);
 }
 
+void reservoirUpdate() {
+  sensorValue = analogRead(RESERVOIR);
+  reservoirVal = map(sensorValue, 0, 1023, 0, 500);
+  Blynk.virtualWrite(V14, reservoirVal);
+
+  // print the results to the serial monitor:
+  Serial.print("pressure sensor = ");
+  Serial.print(sensorValue);
+  Serial.print("\n ");
+  Serial.print("voltage = ");
+  Serial.print(reservoirVal);
+  Serial.print("\n ");
+}
+
+void trayUpdate() {
+  int waterVal = digitalRead(WATER_TRAY);
+  Blynk.virtualWrite(V15, waterVal);
+}
+
+
+void waterAdd() {
+  int waterAddAnalog = 0;
+  int waterAddDigital = digitalRead(WATER_ADD);
+  if (waterAddDigital == 1) {
+    if (lastWaterAdd == 0) {
+      // started adding water
+      waterAddAnalog = 1024;
+    }
+    else {
+      // continued adding water
+      waterAddAnalog = reservoirVal;
+    }
+  }
+  // if we stopped adding water (i.e. waterAdd == 0 && lastWaterAdd == 1) then waterAddAnalog will still be 0
+  lastWaterAdd = waterAddDigital;
+  Blynk.virtualWrite(V16, waterAddAnalog);
+  int temp = map(waterAddAnalog, 0, 500, 0, 1024);
+  analogWrite(WATER_ADD_LED, waterAddAnalog);
+}
+
 void setup()
 {
   // Debug console
@@ -202,6 +253,9 @@ void setup()
   pinMode(HEAT_PIN, OUTPUT);
   pinMode(FAN_PIN, OUTPUT);
   pinMode(BLUE_PIN, OUTPUT);
+  pinMode(RESERVOIR, INPUT);
+  pinMode(WATER_TRAY, INPUT);
+  pinMode(WATER_ADD, INPUT);
 
   dht.begin();
   rtc.begin();
@@ -210,6 +264,9 @@ void setup()
   timer.setInterval(500L, sendSensor);
   timer.setInterval(500L, updateTime);
   timer.setInterval(500L, lightUpdate);
+  timer.setInterval(500L, reservoirUpdate);
+  timer.setInterval(500L, trayUpdate);
+  timer.setInterval(500L, waterAdd);
 }
 
 BLYNK_WRITE(1) {
@@ -262,5 +319,6 @@ BLYNK_WRITE(11) {
 void loop()
 {
   Blynk.run();
-  timer.run(); // Initiates SimpleTimer
+  timer.run(); // Initiates SimpleTimer 
 }
+
