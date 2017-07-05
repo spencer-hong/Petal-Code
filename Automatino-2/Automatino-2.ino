@@ -241,11 +241,11 @@ void waterAdd() {
   int waterAddDigital = digitalRead(WATER_ADD);
   if (waterAddDigital == 1) {
     if (lastWaterAdd == 0) {
-      // started adding water
+      // started adding water, make LED super bright
       waterAddAnalog = 1024;
     }
     else {
-      // continued adding water
+      // continued adding water, increase LED proportionally
       waterAddAnalog = reservoirVal;
     }
   }
