@@ -1,7 +1,6 @@
-#include <ESP8266WiFi.h>
 
-#define WATER_TRAY 4  // D2
-#define VALVE_PIN 0 // D3
+#define WATER_TRAY 3  // D2
+#define VALVE_PIN 2 // D3
 int valve = 0;
 
 void setup()
@@ -13,7 +12,7 @@ void setup()
 
 void loop() {
   delay(1000);
-  int waterVal = analogRead(WATER_TRAY);
+  int waterVal = digitalRead(WATER_TRAY);
   Serial.println("water val = " + String(waterVal));
   if (waterVal == 0) {
     digitalWrite(VALVE_PIN, HIGH);
