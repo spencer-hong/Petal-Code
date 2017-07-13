@@ -16,6 +16,7 @@ import datetime
 import ast
 from pytz import timezone
 import json
+import atexit
 
 # AWS credentials
 awshost = "a3nxzzc72rdj05.iot.us-east-2.amazonaws.com"
@@ -44,6 +45,7 @@ GPIO.setup(light_pin, GPIO.OUT)
 GPIO.setup(fan_pin, GPIO.OUT)
 GPIO.setup(heat_pin, GPIO.OUT)
 GPIO.setup(blue_pin, GPIO.OUT)
+
 # initialize pwm
 light_pwm = GPIO.PWM(light_pin, 500)
 light_pwm.start(50)
@@ -116,10 +118,8 @@ def on_message(client, userdata, msg):
             changeSchedule(payload)
         elif (msg.topic == "auto"):
             setAuto(payload)
-        # below commented only for testing resolveDeltas, UNCOMMENT LATER
-        # elif (msg.topic == "changeLight"):
-        #     custom_light = payload
-        #     light_override = 1
+        elif (msg.topic == "changeLight"):
+            changeCustomLight(payload)
     except (ValueError, TypeError, SyntaxError, RuntimeError):
         print("Bad Message")
 
@@ -285,21 +285,28 @@ def automate():
     if (light_override):
         analogWrite(light_pwm, custom_light)
     else:
-        analogWrite(blue_pwm, current_profile['blue'])
-    analogWrite(light_pwm, current_profile['light'])
+        analogWrite(light_pwm, current_profile['blue'])
+    analogWrite(blue_pwm, current_profile['light'])
     blue = current_profile['blue']
     light = current_profile['light']
 
+def changeCustomLight(val):
+    global custom_light
+    global light_override
+    if (val >= 0) & (val <= 100):
+        custom_light = val
+        light_override = 1
+        mqttc.publish("$aws/things/" + thingName + "/shadow/update",
+            "{\"state\":{\"desired\":{\"custom_light\": null" + "}}}", qos=1)
+
+
 def resolveDeltas(json):
     print(json)
-    global custom_light; global light_override
-    print("resolving deltas")
     if 'desired' in json["state"]:
-        print("here1")
+        print("resolving deltas")
         if 'custom_light' in json["state"]["desired"]:
-            print("here2")
-            custom_light = json["state"]["desired"]["custom_light"]
-            light_override = 1
+            val = json["state"]["desired"]["custom_light"]
+            changeCustomLight(val)
 
 while 1==1:
     global timer
@@ -340,3 +347,5 @@ while 1==1:
     else:
         print("waiting for connection...")
         mqttc.reconnect()
+
+GPIO.cleanup()

@@ -11,6 +11,7 @@ import AWSIoT
 import SwiftyJSON
 
 let thingName = "myThingName"
+var counter = 0
 
 class ViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lightSlider: UISlider!
     @IBOutlet weak var temperatureDisplay: UILabel!
     @IBOutlet weak var humidityDisplay: UILabel!
-    let maxTime = 60
+    let maxTime = 5
     var lightSliderWaitingForSync = 0 // 0 = synced, 1 - x means change made x cycles ago
     
     var thingOperationInProgress = false
@@ -56,21 +57,13 @@ class ViewController: UIViewController {
     @IBAction func lightChanged(_ sender: UISlider) {
         let controlJson = JSON(["state": ["desired": [ "custom_light": Int(sender.value),]]])
         self.iotDataManager.updateShadow(thingName, jsonString: controlJson.rawString()! )
-        // uncomment below code after testing resolveDeltas
-        //        self.iotDataManager.publishString(_: String(sender.value), onTopic: "changeLight", qoS: .messageDeliveryAttemptedAtLeastOnce)
+        self.iotDataManager.publishString(_: String(sender.value), onTopic: "changeLight", qoS: .messageDeliveryAttemptedAtLeastOnce)
         lightSliderWaitingForSync = 1
+        sender.minimumTrackTintColor = UIColor.blue
     }
     
     func getThingState() {
         self.iotDataManager.getShadow(thingName)
-    }
-    
-    func foo(payload: Data) {
-//        DispatchQueue.main.async {
-            let json = JSON(data: (payload as NSData!) as Data)
-            let payloadValue = NSString(data: payload, encoding: String.Encoding.utf8.rawValue)
-            return
-//        }
     }
     
     func mqttEventCallback( _ status: AWSIoTMQTTStatus )
@@ -86,7 +79,8 @@ class ViewController: UIViewController {
                 print( "Connected" )
                 // Register the device shadows once connected.
                 self.iotDataManager.register(withShadow: thingName, options:nil,  eventCallback: self.deviceShadowCallback)
-//                self.iotDataManager.subscribe(toTopic: "$aws/things/myThingName/shadow/update/documents", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.foo)
+                self.iotDataManager.subscribe(toTopic: "$aws/things/myThingName/shadow/update/accepted", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.update)
+                self.iotDataManager.subscribe(toTopic: "light_override", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, extendedCallback: self.subLightOverride)
                 
                 // Two seconds after registering the device shadows, retrieve their current states.
                 Timer.scheduledTimer( timeInterval: 2.5, target: self, selector: #selector(ViewController.getThingState), userInfo: nil, repeats: false )
@@ -109,6 +103,31 @@ class ViewController: UIViewController {
         }
     }
     
+    func update(payload: Data) {
+        DispatchQueue.main.async {
+            let json = JSON(data: (payload as NSData!) as Data)
+            if json["state"]["reported"] != nil {
+                self.updateStatus(payload: json)
+            }
+            self.thingOperationInProgress = false;
+        }
+    }
+    
+    func subLightOverride(a: NSObject, b: String, payload: Data) {
+        DispatchQueue.main.async {
+            let json = JSON(data: (payload as NSData!) as Data)
+            let temp = String(describing: json)
+            if let val = Int(temp) {
+                if val == 1 {
+                    self.lightSlider.minimumTrackTintColor = UIColor.blue
+                }
+                if val == 0 {
+                    self.lightSlider.minimumTrackTintColor = UIColor.lightGray
+                }
+            }
+        }
+    }
+    
     func updateStatus(payload json: JSON) {
         if let temperatureReported = json["state"]["reported"]["temperature"].double {
             temperatureDisplayValue = temperatureReported
@@ -127,6 +146,7 @@ class ViewController: UIViewController {
                 lightSliderValue = lightReported
                 lightSliderWaitingForSync = 0
                 print("Couldn't update lightSlider")
+                lightSlider.minimumTrackTintColor = UIColor.lightGray
             }
         }
     }
@@ -134,6 +154,7 @@ class ViewController: UIViewController {
     func deviceShadowCallback(name:String, operation:AWSIoTShadowOperationType, operationStatus:
         AWSIoTShadowOperationStatusType, clientToken:String, payload:Data){
 //        self.iotDataManager.getShadow(thingName)
+        print("callback")
         DispatchQueue.main.async {
             let json = JSON(data: (payload as NSData!) as Data)
             let stringValue = NSString(data: payload, encoding: String.Encoding.utf8.rawValue)
@@ -221,4 +242,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }
