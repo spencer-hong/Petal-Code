@@ -15,6 +15,18 @@ from random import uniform
 import datetime
 import ast
 from pytz import timezone
+import json
+
+# AWS credentials
+awshost = "a3nxzzc72rdj05.iot.us-east-2.amazonaws.com"
+awsport = 8883
+clientId = "myThingName"
+thingName = "myThingName"
+caPath = "aws-iot-rootCA.crt"
+certPath = "cert.pem"
+keyPath = "privkey.pem"
+
+timer = 0
 
 # output pins
 light_pin = 14;
@@ -76,7 +88,8 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("schedule", 1)
     client.subscribe("auto", 1)
     client.subscribe("changeLight", 1)
-    client.subscribe("$aws/things/myThingName/shadow/update/delta", 1)
+    client.subscribe("$aws/things/" + thingName + "/shadow/get/accepted")
+    # client.subscribe("$aws/things/" + thingName + "/shadow/update/documents", 1)
 
 def on_disconnect(client, userdata, rc):
     global connflag
@@ -87,10 +100,13 @@ def on_message(client, userdata, msg):
     global custom_light
     global light_override
     try:
-        print(msg.topic+" "+str(msg.payload))
-        print("topic: "+msg.topic)
-        print("payload: "+str(msg.payload))
-        # if (msg.topic == "$aws/things/myThingName/shadow/update/delta"):
+        print("Topic: "+msg.topic)
+        # if (msg.topic == "$aws/things/" + thingName + "/shadow/update/delta"):
+            # do whatever and then send back an update
+        if (msg.topic == "$aws/things/" + thingName + "/shadow/get/accepted"):
+            resolveDeltas(json.loads(msg.payload))
+            return
+        print("Payload: "+str(msg.payload))
         payload = ast.literal_eval(msg.payload)
         if (msg.topic == "led"):
             ledToggle(payload)
@@ -100,11 +116,10 @@ def on_message(client, userdata, msg):
             changeSchedule(payload)
         elif (msg.topic == "auto"):
             setAuto(payload)
-        elif (msg.topic == "changeLight"):
-            # ADDDDD if theres a delta clear it
-            print("here")
-            custom_light = payload
-            light_override = 1
+        # below commented only for testing resolveDeltas, UNCOMMENT LATER
+        # elif (msg.topic == "changeLight"):
+        #     custom_light = payload
+        #     light_override = 1
     except (ValueError, TypeError, SyntaxError, RuntimeError):
         print("Bad Message")
 
@@ -115,15 +130,6 @@ mqttc = paho.Client()
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 #mqttc.on_log = on_log
-
-# AWS credentials
-awshost = "a3nxzzc72rdj05.iot.us-east-2.amazonaws.com"
-awsport = 8883
-clientId = "myThingName"
-thingName = "myThingName"
-caPath = "aws-iot-rootCA.crt"
-certPath = "cert.pem"
-keyPath = "privkey.pem"
 
 mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
 
@@ -284,8 +290,25 @@ def automate():
     blue = current_profile['blue']
     light = current_profile['light']
 
+def resolveDeltas(json):
+    print(json)
+    global custom_light; global light_override
+    print("resolving deltas")
+    if 'desired' in json["state"]:
+        print("here1")
+        if 'custom_light' in json["state"]["desired"]:
+            print("here2")
+            custom_light = json["state"]["desired"]["custom_light"]
+            light_override = 1
+
 while 1==1:
+    global timer
     sleep(1)
+    timer = timer + 1
+    # check for outstanding deltas every 7.5 seconds
+    if timer >= 5:
+        mqttc.publish("$aws/things/" + thingName + "/shadow/get","", qos=1)
+        timer = 0
     # mqttc.loop(timeout=1.0, max_packets=1)
     updateCurrentProfile()
     humreading, tempreading = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 4)
@@ -303,7 +326,7 @@ while 1==1:
     
     if connflag == True:
         if humreading is not None and tempreading is not None:
-            mqttc.publish("$aws/things/myThingName/shadow/update",
+            mqttc.publish("$aws/things/" + thingName + "/shadow/update",
                 "{\"state\":{\"reported\":{\"temperature\": " + str(tempreading) + ", \"humidity\":" + str(humreading) +
                 ", \"tempSP\":" + str(current_profile['temperature']) + 
                 ", \"custom_light\":" + str(custom_light) + 

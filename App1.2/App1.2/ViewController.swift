@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lightSlider: UISlider!
     @IBOutlet weak var temperatureDisplay: UILabel!
     @IBOutlet weak var humidityDisplay: UILabel!
-    let timer = 60
+    let maxTime = 60
     var lightSliderWaitingForSync = 0 // 0 = synced, 1 - x means change made x cycles ago
     
     var thingOperationInProgress = false
@@ -56,22 +56,21 @@ class ViewController: UIViewController {
     @IBAction func lightChanged(_ sender: UISlider) {
         let controlJson = JSON(["state": ["desired": [ "custom_light": Int(sender.value),]]])
         self.iotDataManager.updateShadow(thingName, jsonString: controlJson.rawString()! )
+        // uncomment below code after testing resolveDeltas
+        //        self.iotDataManager.publishString(_: String(sender.value), onTopic: "changeLight", qoS: .messageDeliveryAttemptedAtLeastOnce)
         lightSliderWaitingForSync = 1
     }
     
     func getThingState() {
         self.iotDataManager.getShadow(thingName)
     }
-//    
-//    func documentsCallback(name:String, operation:AWSIoTShadowOperationType,operationStatus: AWSIoTShadowOperationStatusType, clientToken:String,payload:Data) {
-//        let json = JSON(data: (payload as NSData!) as Data)
-//        let stringValue = NSString(data: payload, encoding: String.Encoding.utf8.rawValue)
-//    
-//        
-//    }
     
-    func foo(payload json: Data) {
-        
+    func foo(payload: Data) {
+//        DispatchQueue.main.async {
+            let json = JSON(data: (payload as NSData!) as Data)
+            let payloadValue = NSString(data: payload, encoding: String.Encoding.utf8.rawValue)
+            return
+//        }
     }
     
     func mqttEventCallback( _ status: AWSIoTMQTTStatus )
@@ -87,7 +86,7 @@ class ViewController: UIViewController {
                 print( "Connected" )
                 // Register the device shadows once connected.
                 self.iotDataManager.register(withShadow: thingName, options:nil,  eventCallback: self.deviceShadowCallback)
-                self.iotDataManager.subscribe(toTopic: "$aws/things/myThingName/shadow/update/documents", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.foo)
+//                self.iotDataManager.subscribe(toTopic: "$aws/things/myThingName/shadow/update/documents", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.foo)
                 
                 // Two seconds after registering the device shadows, retrieve their current states.
                 Timer.scheduledTimer( timeInterval: 2.5, target: self, selector: #selector(ViewController.getThingState), userInfo: nil, repeats: false )
@@ -117,11 +116,14 @@ class ViewController: UIViewController {
         if let humidityReported = json["state"]["reported"]["humidity"].double {
             humidityDisplayValue = humidityReported
         }
-        if let lightReported = json["state"]["reported"]["humidity"].int {
+        if let lightReported = json["state"]["reported"]["custom_light"].int {
             if lightSliderValue == lightReported {
                 lightSliderWaitingForSync = 0
             }
-            else if lightSliderWaitingForSync > timer {
+            else if lightSliderWaitingForSync < maxTime && lightSliderWaitingForSync > 0 {
+                lightSliderWaitingForSync = lightSliderWaitingForSync + 1
+            }
+            else if lightSliderWaitingForSync >= maxTime {
                 lightSliderValue = lightReported
                 lightSliderWaitingForSync = 0
                 print("Couldn't update lightSlider")
@@ -176,18 +178,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Initialize the setpoint stepper
-        //        setpointStepper.wraps=false
-        //        setpointStepper.maximumValue=90
-        //        setpointStepper.minimumValue=50
-        //        setpointStepper.value=70
-        //        currentSetpointStepValue = setpointStepper.value
-        //        // Initialize the temperature and setpoint labels
-        //        interiorLabel.text="60"
-        //        exteriorLabel.text="45"
-        //        setpointLabel.text=setpointStepper.value.description
-        //        // Initialize the status switch
-        //        statusSwitch.isOn=true
         
         // Use Cognito authentication
         let credentialProvider = AWSCognitoCredentialsProvider(regionType: AwsRegion, identityPoolId: CognitoIdentityPoolId)
@@ -198,7 +188,6 @@ class ViewController: UIViewController {
             credentialsProvider: credentialProvider)
         
         // Init IOT
-        
         AWSIoTDataManager.register(with: iotDataConfiguration!, forKey: "MyIotDataManager")
         iotDataManager = AWSIoTDataManager(forKey: "MyIotDataManager")
         
