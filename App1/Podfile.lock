@@ -1,0 +1,18 @@
+PODS:
+  - AWSCore (2.5.8)
+  - AWSIoT (2.5.8):
+    - AWSCore (= 2.5.8)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - AWSIoT (~> 2.5.0)
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
+  AWSIoT: 209ae36ea1e48a9b8bcb65a94e8267265b4ff2b3
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: fe7e3b1f642f846e11c4b800084bb9128ad91abd
+
+COCOAPODS: 1.2.1

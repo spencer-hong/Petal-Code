@@ -11,6 +11,8 @@ void setup()
   TRAY_PINS[i] = i + 2;
   VALVE_PINS[i] = i + trays + 2;
   valves[i] = 0;
+  Serial.println(TRAY_PINS[i]);
+  Serial.println(VALVE_PINS[i]);
   }
   
   for (int i = 0; i < trays; i++) {
@@ -27,7 +29,7 @@ void loop() {
 }
 
 void trayUpdate(int pin) {
-  int waterVal = analogRead(TRAY_PINS[pin]);
+  int waterVal = digitalRead(TRAY_PINS[pin]);
   Serial.println("Tray " + String(pin) + " water val = " + String(waterVal));
   if (waterVal == 0) {
     digitalWrite(VALVE_PINS[pin], HIGH);
