@@ -18,10 +18,13 @@ class ViewController: UIViewController {
     
     var iotDataManager: AWSIoTDataManager!
     
+    @IBOutlet weak var scheduleSlider: CircularSlider!
     @IBOutlet weak var lightSlider: UISlider!
     @IBOutlet weak var temperatureDisplay: UILabel!
     @IBOutlet weak var humidityDisplay: UILabel!
+    
     let maxTime = 5
+
     var lightSliderWaitingForSync = 0 // 0 = synced, 1 - x means change made x cycles ago
     
     var thingOperationInProgress = false
@@ -198,8 +201,16 @@ class ViewController: UIViewController {
         print("operation rejected on: \(thingName)")
     }
     
+    func slideEnded() {
+        print("\(scheduleSlider.value)")
+        let schedule = "[['day',\(Int(scheduleSlider.value))],['night','1800']]"
+        self.iotDataManager.publishString(_: schedule, onTopic: "schedule", qoS: .messageDeliveryAttemptedAtLeastOnce)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCircularSlider()
+        setupTapGesture()
         
         // Use Cognito authentication
         let credentialProvider = AWSCognitoCredentialsProvider(regionType: AwsRegion, identityPoolId: CognitoIdentityPoolId)
@@ -239,9 +250,32 @@ class ViewController: UIViewController {
         self.iotDataManager.connectUsingWebSocket( withClientId: UUID().uuidString, cleanSession:true, statusCallback: mqttEventCallback)
     }
     
+    // MARK: - methods
+    fileprivate func setupCircularSlider() {
+        scheduleSlider.delegate = self
+    }
+    
+    fileprivate func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc fileprivate func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 }
+
+// MARK: - CircularSliderDelegate
+extension ViewController: CircularSliderDelegate {
+    func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
+        return floorf(value)
+    }
+}
+

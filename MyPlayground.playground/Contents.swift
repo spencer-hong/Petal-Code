@@ -2,7 +2,10 @@
 
 import UIKit
 
-var str = "Hello, playground"
-var d: Double = 24
-var x = floor(d*100)/100
-var y = floor(d*10)/10
+var val: Float = 5.766
+
+if (val - floor(val*1)/1) < 0.5 {
+    val = floor(val*1)/1
+}
+else {val = round(val)}
+

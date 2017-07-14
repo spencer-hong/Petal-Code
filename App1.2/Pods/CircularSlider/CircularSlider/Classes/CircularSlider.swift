@@ -15,6 +15,7 @@ import UIKit
     @objc optional func circularSlider(_ circularSlider: CircularSlider, didBeginEditing textfield: UITextField)
     @objc optional func circularSlider(_ circularSlider: CircularSlider, didEndEditing textfield: UITextField)
     //  optional func circularSlider(circularSlider: CircularSlider, attributeTextForValue value: Float) -> NSAttributedString
+    func slideEnded()
 }
 
 
@@ -271,7 +272,7 @@ open class CircularSlider: UIView {
     fileprivate func configureProgressLayer() {
         progressCircleLayer.frame = bounds
         progressCircleLayer.strokeEnd = 0
-        layer.addSublayer(progressCircleLayer)
+        //layer.addSublayer(progressCircleLayer)        //remove progress circle
         appearanceProgressLayer()
     }
     
@@ -322,7 +323,12 @@ open class CircularSlider: UIView {
     }
     
     fileprivate func appearanceDivisa() {
-        divisaLabel.text = divisa
+        if (self.value <= 11) {
+            divisaLabel.text = "AM"
+        } else {
+            divisaLabel.text = "PM"
+        }
+        
         divisaLabel.font = divisaFont
     }
     
@@ -376,10 +382,19 @@ open class CircularSlider: UIView {
     
     fileprivate func updateLabels() {
         updateValueLabel()
+        appearanceDivisa()
     }
     
     fileprivate func updateValueLabel() {
-        textfield.attributedText = value.formatWithFractionDigits(fractionDigits, customDecimalSeparator: customDecimalSeparator).sliderAttributeString(intFont: intFont, decimalFont: decimalFont, customDecimalSeparator: customDecimalSeparator )
+        if (self.value > 12) {
+            let pmVal = self.value - 12
+            textfield.attributedText = pmVal.formatWithFractionDigits(fractionDigits, customDecimalSeparator: customDecimalSeparator).sliderAttributeString(intFont: intFont, decimalFont: decimalFont, customDecimalSeparator: customDecimalSeparator )
+        } else if (self.value == 0) {
+            let midNightVal = self.value + 12
+            textfield.attributedText = midNightVal.formatWithFractionDigits(fractionDigits, customDecimalSeparator: customDecimalSeparator).sliderAttributeString(intFont: intFont, decimalFont: decimalFont, customDecimalSeparator: customDecimalSeparator )
+        } else {
+            textfield.attributedText = value.formatWithFractionDigits(fractionDigits, customDecimalSeparator: customDecimalSeparator).sliderAttributeString(intFont: intFont, decimalFont: decimalFont, customDecimalSeparator: customDecimalSeparator )
+        }
     }
     
     
@@ -389,6 +404,11 @@ open class CircularSlider: UIView {
         
         if gesture.state == UIGestureRecognizerState.began {
             cancelAnimation()
+            backgroundCircleLayer.strokeColor = pgHighlightedColor.cgColor
+        }
+        if gesture.state == UIGestureRecognizerState.ended {
+            delegate?.slideEnded()
+            backgroundCircleLayer.strokeColor = bgColor.cgColor
         }
         
         var rotationAngle = gesture.rotation
@@ -399,7 +419,7 @@ open class CircularSlider: UIView {
         }
         rotationAngle = min(endAngle, max(startAngle, rotationAngle))
         
-        guard abs(Double(rotationAngle - knobAngle)) < M_PI_2 else { return }
+        //guard abs(Double(rotationAngle - knobAngle)) < M_PI_2 else { return }
         
         let valueForAngle = Float(rotationAngle - startAngle) / Float(angleRange) * valueRange + minimumValue
         setValue(valueForAngle, animated: false)
