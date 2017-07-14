@@ -19,11 +19,13 @@ class ViewController: UIViewController {
     var iotDataManager: AWSIoTDataManager!
     
     @IBOutlet weak var scheduleSlider: CircularSlider!
-    @IBOutlet weak var lightSlider: UISlider!
     @IBOutlet weak var temperatureDisplay: UILabel!
     @IBOutlet weak var humidityDisplay: UILabel!
+    @IBOutlet weak var lightSlider: UISlider!
     
-    let maxTime = 5
+    var oceanColor = UIColor(hexString: "#004080")
+    
+    let maxTime = 3
 
     var lightSliderWaitingForSync = 0 // 0 = synced, 1 - x means change made x cycles ago
     
@@ -58,12 +60,17 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func lightChanging(_ sender: UISlider) {
+        sender.minimumTrackTintColor = oceanColor
+    }
+
     @IBAction func lightChanged(_ sender: UISlider) {
+        print("here")
         let controlJson = JSON(["state": ["desired": [ "custom_light": Int(sender.value),]]])
         self.iotDataManager.updateShadow(thingName, jsonString: controlJson.rawString()! )
         self.iotDataManager.publishString(_: String(sender.value), onTopic: "changeLight", qoS: .messageDeliveryAttemptedAtLeastOnce)
         lightSliderWaitingForSync = 1
-        sender.minimumTrackTintColor = UIColor.blue
+        sender.minimumTrackTintColor = oceanColor
     }
     
     func getThingState() {
@@ -123,9 +130,10 @@ class ViewController: UIViewController {
             let temp = String(describing: json)
             if let val = Int(temp) {
                 if val == 1 {
-                    self.lightSlider.minimumTrackTintColor = UIColor.blue
+                    self.lightSlider.minimumTrackTintColor = self.oceanColor
                 }
                 if val == 0 {
+                    self.lightSliderWaitingForSync = 0
                     self.lightSlider.minimumTrackTintColor = UIColor.lightGray
                 }
             }
@@ -142,15 +150,18 @@ class ViewController: UIViewController {
         if let lightReported = json["state"]["reported"]["custom_light"].int {
             if lightSliderValue == lightReported {
                 lightSliderWaitingForSync = 0
+                return
             }
-            else if lightSliderWaitingForSync < maxTime && lightSliderWaitingForSync > 0 {
-                lightSliderWaitingForSync = lightSliderWaitingForSync + 1
+            lightSliderWaitingForSync = lightSliderWaitingForSync + 1
+            if lightSliderWaitingForSync < maxTime && lightSliderWaitingForSync > 0 {
+                
+                print("\(lightSliderWaitingForSync)")
             }
             else if lightSliderWaitingForSync >= maxTime {
                 lightSliderValue = lightReported
                 lightSliderWaitingForSync = 0
                 print("Couldn't update lightSlider")
-                lightSlider.minimumTrackTintColor = UIColor.lightGray
+//                lightSlider.minimumTrackTintColor = UIColor.lightGray
             }
         }
     }
@@ -202,8 +213,20 @@ class ViewController: UIViewController {
     }
     
     func slideEnded() {
-        print("\(scheduleSlider.value)")
-        let schedule = "[['day',\(Int(scheduleSlider.value))],['night','1800']]"
+        var val = scheduleSlider.value
+        var schedule = ""
+        if val < 4 {
+            schedule = "[['day','0\(Int(scheduleSlider.value + 6))00'],['night','0\(Int(scheduleSlider.value))00']]"
+        }
+        else if val < 10 {
+            schedule = "[['day','\(Int(scheduleSlider.value + 6))00'],['night','0\(Int(scheduleSlider.value))00']]"
+        }
+        else if val > 20 {
+            schedule = "[['day','\(Int(scheduleSlider.value - 18))00'],['night','\(Int(scheduleSlider.value))00']]"
+        }
+        else {
+            schedule = "[['day','\(Int(scheduleSlider.value + 6))00'],['night','\(Int(scheduleSlider.value))00']]"
+        }
         self.iotDataManager.publishString(_: schedule, onTopic: "schedule", qoS: .messageDeliveryAttemptedAtLeastOnce)
     }
     
@@ -211,6 +234,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupCircularSlider()
         setupTapGesture()
+        lightSlider.minimumTrackTintColor = oceanColor
+        lightSlider.minimumTrackTintColor = UIColor.lightGray
         
         // Use Cognito authentication
         let credentialProvider = AWSCognitoCredentialsProvider(regionType: AwsRegion, identityPoolId: CognitoIdentityPoolId)
@@ -276,6 +301,33 @@ class ViewController: UIViewController {
 extension ViewController: CircularSliderDelegate {
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
         return floorf(value)
+    }
+}
+
+extension UIColor {
+    public convenience init?(hexString: String) {
+        let r, g, b, a: CGFloat
+        
+        if hexString.hasPrefix("#") {
+            let start = hexString.index(hexString.startIndex, offsetBy: 1)
+            let hexColor = hexString.substring(from: start)
+            
+            if hexColor.characters.count == 8 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+                
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+                    a = CGFloat(hexNumber & 0x000000ff) / 255
+                    
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+        return nil
     }
 }
 

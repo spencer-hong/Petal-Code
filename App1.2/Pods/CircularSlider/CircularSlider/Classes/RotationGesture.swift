@@ -50,7 +50,7 @@ open class RotationGestureRecognizer: UIPanGestureRecognizer {
     
     func updateRotationWithTouches(_ touches: Set<NSObject>) {
         if let touch = touches[touches.startIndex] as? UITouch {
-            print(rotation)
+//            print(rotation)
             rotation = rotationForLocation(touch.location(in: view))
         }
     }

@@ -77,7 +77,8 @@ profiles = [
     {'name': 'germ','temperature': 24, 'humidity': 50, 'light': 0, 'blue': 100}
 ]
 current_profile = profiles[0]
-schedule = [['day','0600'],['night','1800']]
+last_profile = profiles[0]
+schedule = [['day','0400'],['night','2200']]
 
 # network settings
 connflag = False
@@ -90,6 +91,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("schedule", 1)
     client.subscribe("auto", 1)
     client.subscribe("changeLight", 1)
+    client.subscribe("light_override", 1)
     client.subscribe("$aws/things/" + thingName + "/shadow/get/accepted")
     # client.subscribe("$aws/things/" + thingName + "/shadow/update/documents", 1)
 
@@ -120,6 +122,8 @@ def on_message(client, userdata, msg):
             setAuto(payload)
         elif (msg.topic == "changeLight"):
             changeCustomLight(payload)
+        elif (msg.topic == "light_override"):
+            light_override = payload
     except (ValueError, TypeError, SyntaxError, RuntimeError):
         print("Bad Message")
 
@@ -257,9 +261,11 @@ def updateCurrentProfile(arg = False):
             maximin = last
         indices = [profiles.index(x) for x in profiles if x['name'] == schedule[maximin][0]]
         if len(indices) >= 1:
-            if current_profile != profiles[indices[0]]:
+            if not current_profile.get("name") == (profiles[indices[0]].get("name")):
                 # turn off the light override if we are switching schedules
                 light_override = 0
+                mqttc.publish("light_override",
+                    "0", qos=1)
                 current_profile = profiles[indices[0]]
         if arg:
             print("current profile is \"" + current_profile['name'] + "\"")
@@ -285,8 +291,8 @@ def automate():
     if (light_override):
         analogWrite(light_pwm, custom_light)
     else:
-        analogWrite(light_pwm, current_profile['blue'])
-    analogWrite(blue_pwm, current_profile['light'])
+        analogWrite(light_pwm, current_profile['light'])
+    analogWrite(blue_pwm, current_profile['blue'])
     blue = current_profile['blue']
     light = current_profile['light']
 
