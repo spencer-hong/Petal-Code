@@ -9,6 +9,7 @@
 import UIKit
 import AWSIoT
 import SwiftyJSON
+import CircularSlider
 
 let thingName = "myThingName"
 var counter = 0
