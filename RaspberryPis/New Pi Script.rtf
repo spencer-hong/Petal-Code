@@ -1,0 +1,117 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+\f3\fnil\fcharset0 HelveticaNeue;\f4\fmodern\fcharset0 Courier;\f5\fnil\fcharset0 Georgia;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red224\green213\blue97;\red246\green246\blue239;
+\red224\green213\blue97;\red60\green60\blue60;\red246\green246\blue239;\red0\green0\blue0;\red239\green237\blue236;
+\red148\green108\blue71;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red26\green27\blue24;
+\red244\green0\blue95;\red27\green31\blue34;\red27\green29\blue31;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;\cssrgb\c90196\c85882\c45490;\cssrgb\c97255\c97255\c94902;
+\cssrgb\c90196\c85882\c45490;\cssrgb\c30196\c30196\c30196;\cssrgb\c97255\c97255\c94902;\cssrgb\c0\c0\c0;\cssrgb\c94902\c94510\c94118;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c100000\c100000\c100000\c49804;\cssrgb\c0\c0\c0\c80000;\cssrgb\c100000\c100000\c100000;\cssrgb\c13725\c14118\c12157;
+\cssrgb\c97647\c14902\c44706;\cssrgb\c14118\c16078\c18039;\cssrgb\c14118\c15294\c16078;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 DONT give IAM access to the RPi\
+they can see the certificate, and even the policy but it doesnt matter if they change the policy because they cant update it without aws cli and IAM access.\
+they can change client id and thing name b/c of automatino\
+so we hardcode the client id/thingName we chose for the device onto the policy instead of creating a policy that lets them publish/subscribe to any topic with their client id (which they can change)\
+OR\
+allow to only connect if certificate is for the thing they\'92re connecting from and then use variable $thingName everywhere\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 on MASTER\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \
+copy pi generic and rename to new pi<x>\
+\
+cd into it
+\fs28 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 aws iot create-thing\strokec4  \strokec3 --thing-name\strokec4  \strokec3 \'93pi<x>\'94\strokec4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 aws iot create-keys-and-certificate\strokec4  \strokec3 --set-as-active\strokec4  \strokec3 --certificate-pem-outfile\strokec4  \strokec3 cert.pem --public-key-outfile\strokec4  \strokec3 publicKey.pem --private-key-outfile\strokec4  \strokec3 privkey.pem\strokec4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2\b \cf2 IF
+\f1\b0  ATTACHING sepcific policy (NOT OneDeviceGeneric) then \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \strokec3 aws iot create-policy\strokec4  \strokec3 --policy-name\strokec4  \strokec3 \'93<policyname>\'94\strokec4  \strokec3 --policy-document\strokec4  \strokec3 file:\strokec4 //\cf2 \outl0\strokewidth0 <policyname>\cf2 \outl0\strokewidth0 \strokec3 .json\
+\pard\pardeftab720\sl440\sa400\partightenfactor0
+
+\f3 \cf2 \strokec6 Paste your\'a0
+\b certificate-arn
+\b0 \'a0inside the following command before entering it:\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1 \cf2 \strokec3 aws iot attach-principal-policy --principal\strokec4  \strokec3 "certificate-arn"\strokec4  \strokec3 --policy-name\strokec4  \strokec3 "\cf2 \outl0\strokewidth0 <policyname>\cf2 \outl0\strokewidth0 \strokec3 "\strokec4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \
+\
+
+\f2\b ELSE
+\f1\b0 \
+\pard\pardeftab720\sl440\partightenfactor0
+
+\f3 \cf2 \strokec6 Paste your\'a0
+\b certificate-arn
+\b0 \'a0inside the following command before entering it:
+\f1 \strokec4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \strokec3 aws iot attach-principal-policy --principal\strokec4  \strokec3 "certificate-arn"\strokec4  \strokec3 --policy-name\strokec4  \strokec3 "\cf2 \outl0\strokewidth0 OneDeviceGeneric\cf2 \outl0\strokewidth0 \strokec3 "\strokec4 \
+\
+
+\fs26 \strokec3 aws iot attach-thing-principal --thing-name\strokec4  \strokec3 \'93pi<x>\'93\strokec4  \strokec3 --principal\strokec4  \strokec3 "certificate-arn"\strokec4 \
+\
+\
+on DEVICE\
+\
+install pip\
+	
+\f4\fs28 \cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 sudo apt\cf10 \cb11 \strokec10 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 -\cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 get update\
+\pard\pardeftab720\sl480\partightenfactor0
+
+\f5\fs42 \cf12 \cb13 \strokec12 \shad0 sudo apt-get upgrade
+\f4\fs28 \cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1\fs26 \cf4 \cb14 \strokec4 \shad0 sudo apt-\cf15 \strokec15 get\cf4 \strokec4  dist-\cf15 \strokec15 upgrade\cf4 \strokec4 \
+sudo apt-\cf3 \strokec3 get\cf4 \strokec4  install \cf15 \strokec15 python\cf4 \strokec4 -dev \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs28 \cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 \
+
+\f1\fs26 \cf2 \cb1 \strokec4 \shad0 	
+\f4\fs28 \cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 sudo apt\cf10 \cb11 \strokec10 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 -\cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 get install python3\cf10 \cb11 \strokec10 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 -\cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 pip\
+
+\f1\fs26 \cf2 \cb1 \strokec4 \shad0 	
+\f4\fs28 \cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 sudo apt\cf10 \cb11 \strokec10 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 -\cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 get install python\cf10 \cb11 \strokec10 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 -\cf8 \cb9 \strokec8 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 pip\
+
+\f1\fs26 \cf2 \cb1 \strokec4 \shad0 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb14 sudo apt-\cf3 \strokec3 get\cf4 \strokec4  install git \
+git clone https://github.\cf15 \strokec15 com\cf4 \strokec4 /adafruit/Adafruit_Python_DHT.git \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf15 \strokec15 cd\cf4 \strokec4  Adafruit_Python_DHT \
+sudo \cf15 \strokec15 python\cf4 \strokec4  setup.\cf15 \strokec15 py\cf4 \strokec4  install \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb1 \
+sudo pip \strokec15 install\strokec4  paho-mqtt
+\fs27\fsmilli13600 \strokec16 \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\fs26 \cf17 \strokec17 sudo pip install pytz\cf2 \strokec4 \
+}

@@ -1,0 +1,45 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+    {
+        "Effect": "Allow",
+        "Action":["iot:Publish"],
+        "Resource": [
+            "arn:aws:iot:us-east-2:991292982338:topic/$aws/things/pi3/shadow/update",
+            "arn:aws:iot:us-east-2:991292982338:topic/$aws/things/pi3/shadow/get"
+        ]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:Receive"],
+        "Resource": ["*"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:Subscribe"],
+        "Resource": [
+            "arn:aws:iot:us-east-2:991292982338:topicfilter/pi3/*",
+            "arn:aws:iot:us-east-2:991292982338:topicfilter/$aws/things/pi3/shadow/get/accepted"
+        ]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:GetThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/pi3"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:UpdateThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/pi3"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:DeleteThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/pi3"]
+    },
+    {
+        "Effect": "Allow",
+        "Action": ["iot:Connect"],
+        "Resource": ["*"]
+    }]
+}

@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '8.0'
+use_frameworks!
+
+target 'App1.3' do
+    pod 'AWSIoT', '~>2.5.0'
+    pod 'SwiftyJSON'
+    pod 'CircularSlider'
+end

@@ -11,7 +11,7 @@ import AWSIoT
 import SwiftyJSON
 import CircularSlider
 
-let thingName = "myThingName"
+let thingName = "pi3"
 var counter = 0
 
 class ViewController: UIViewController {
@@ -60,15 +60,22 @@ class ViewController: UIViewController {
         }
     }
     
+    // The step you want to have
+    let step: Float = 10
+    
     @IBAction func lightChanging(_ sender: UISlider) {
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
         sender.minimumTrackTintColor = oceanColor
+        lightSliderWaitingForSync = 1
+        self.iotDataManager.publishString(_: String(sender.value), onTopic: "\(thingName)/change_light", qoS: .messageDeliveryAttemptedAtLeastOnce)
     }
 
     @IBAction func lightChanged(_ sender: UISlider) {
-        print("here")
-        let controlJson = JSON(["state": ["desired": [ "custom_light": Int(sender.value),]]])
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
+        let controlJson = JSON(["state": ["desired": [ "light": Int(sender.value),]]])
         self.iotDataManager.updateShadow(thingName, jsonString: controlJson.rawString()! )
-        self.iotDataManager.publishString(_: String(sender.value), onTopic: "changeLight", qoS: .messageDeliveryAttemptedAtLeastOnce)
         lightSliderWaitingForSync = 1
         sender.minimumTrackTintColor = oceanColor
     }
@@ -90,7 +97,7 @@ class ViewController: UIViewController {
                 print( "Connected" )
                 // Register the device shadows once connected.
                 self.iotDataManager.register(withShadow: thingName, options:nil,  eventCallback: self.deviceShadowCallback)
-                self.iotDataManager.subscribe(toTopic: "$aws/things/myThingName/shadow/update/accepted", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.update)
+                self.iotDataManager.subscribe(toTopic: "$aws/things/\(thingName)/shadow/update/accepted", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, messageCallback: self.update)
                 self.iotDataManager.subscribe(toTopic: "light_override", qoS: AWSIoTMQTTQoS.messageDeliveryAttemptedAtLeastOnce, extendedCallback: self.subLightOverride)
                 
                 // Two seconds after registering the device shadows, retrieve their current states.
@@ -147,14 +154,14 @@ class ViewController: UIViewController {
         if let humidityReported = json["state"]["reported"]["humidity"].double {
             humidityDisplayValue = humidityReported
         }
-        if let lightReported = json["state"]["reported"]["custom_light"].int {
+        if let lightReported = json["state"]["reported"]["light"].int {
             if lightSliderValue == lightReported {
                 lightSliderWaitingForSync = 0
                 return
             }
+//            if lightSlider is not being used still
             lightSliderWaitingForSync = lightSliderWaitingForSync + 1
             if lightSliderWaitingForSync < maxTime && lightSliderWaitingForSync > 0 {
-                
                 print("\(lightSliderWaitingForSync)")
             }
             else if lightSliderWaitingForSync >= maxTime {
@@ -163,6 +170,16 @@ class ViewController: UIViewController {
                 print("Couldn't update lightSlider")
 //                lightSlider.minimumTrackTintColor = UIColor.lightGray
             }
+        }
+        if let lightOverride = json["state"]["reported"]["light_override"].int {
+            if lightOverride == 1 {
+                self.lightSlider.minimumTrackTintColor = self.oceanColor
+            }
+            if lightOverride == 0 {
+                self.lightSliderWaitingForSync = 0
+                self.lightSlider.minimumTrackTintColor = UIColor.lightGray
+            }
+            
         }
     }
     

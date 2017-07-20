@@ -349,6 +349,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jaiveer.App1.2.App1-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -363,6 +364,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jaiveer.App1.2.App1-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -385,6 +387,7 @@
 				AF904F5D1F17D6B60059D626 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

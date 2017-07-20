@@ -1,0 +1,50 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+    {
+        "Effect": "Allow",
+        "Action":["iot:Publish"],
+        "Resource": [
+            "arn:aws:iot:us-east-2:991292982338:topic/$aws/things/${iot:Connection.Thing.ThingName}/shadow/update",
+            "arn:aws:iot:us-east-2:991292982338:topic/$aws/things/${iot:Connection.Thing.ThingName}/shadow/get"
+        ]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:Receive"],
+        "Resource": ["*"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:Subscribe"],
+        "Resource": [
+            "arn:aws:iot:us-east-2:991292982338:topicfilter/${iot:Connection.Thing.ThingName}/*",
+            "arn:aws:iot:us-east-2:991292982338:topicfilter/$aws/things/${iot:Connection.Thing.ThingName}/shadow/get/accepted"
+        ]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:GetThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/${iot:Connection.Thing.ThingName}"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:UpdateThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/${iot:Connection.Thing.ThingName}"]
+    },
+    {
+        "Effect": "Allow",
+        "Action":["iot:DeleteThingShadow"],
+        "Resource": ["arn:aws:iot:us-east-2:991292982338:thing/${iot:Connection.Thing.ThingName}"]
+    },
+    {
+        "Effect": "Allow",
+        "Action": ["iot:Connect"],
+        "Resource": ["*"],  
+        "Condition":{  
+            "Bool":{  
+                "iot:Connection.Thing.IsAttached":["true"]
+            }
+        }
+    }]
+}
