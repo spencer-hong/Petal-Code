@@ -63,6 +63,8 @@ class ViewController: UIViewController {
     // The step you want to have
     let step: Float = 10
     
+    // TODO: Use property observer to only send messages if oldValue != the new value
+    
     @IBAction func lightChanging(_ sender: UISlider) {
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue

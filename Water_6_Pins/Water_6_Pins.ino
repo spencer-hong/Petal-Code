@@ -1,11 +1,11 @@
 const int trays = 6;
 int TRAY_PINS[trays];
 int VALVE_PINS[trays];
-int MODE_PIN = A0;
+int MODE_PIN = A2;
 int valves[trays];
 int test_mode = 0;
 int valve_open_time = 20; // in seconds
-int valve_close_time = 18000; // in seconds
+long valve_close_time = 36000; // in seconds
 int open_timer[trays];
 int close_timer[trays];
 
@@ -31,28 +31,42 @@ void setup()
 
 void loop() {
   delay(1000);
+  test_mode = digitalRead(MODE_PIN);
+  Serial.println("test mode: " + String(test_mode));
+
   for (int pin = 0; pin < trays; pin++) {
-    if (open_timer[pin] > valve_open_time) {
+    if (test_mode != 0) {
+       trayUpdate(pin);
+       Serial.println("testing");
+       return;
+    }
+    else if (open_timer[pin] > valve_open_time) {
       open_timer[pin] = 0;
       closeAndWait(pin);
+      Serial.println("close and wait");
+      return;
     }
     else if (close_timer[pin] > valve_close_time) {
       close_timer[pin] = 0;
+      Serial.println("close timer > max");
+      Serial.println(String(close_timer[pin]));
+      Serial.println(String(valve_close_time));
+      return;
     }
     else if (open_timer[pin] > 0) {
       open_timer[pin]++;
+      Serial.println("open timer +");
+      return;
     }
     else if (close_timer[pin] > 0) {
-      open_timer[pin]++;
+      close_timer[pin]++;
+      Serial.println("close timer +");
+      return;
+
     }
     else {
-      test_mode = digitalRead(MODE_PIN);
-      if (test_mode != 0) {
-        trayUpdate(pin);
-      }
-      else {
         trayUpdateLong(pin);
-      }
+        Serial.println("long update");
     }
   }
 }
