@@ -1,0 +1,6 @@
+framework module Pods_xcPetalV3 {
+  umbrella header "Pods-xcPetalV3-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,649 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A556C246443D2D0456402FE /* Pods_xcPetalV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13104FDE5203330C893E6243 /* Pods_xcPetalV3.framework */; };
+		653F23951F254ADD0042A12E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23941F254ADD0042A12E /* AppDelegate.swift */; };
+		653F23971F254ADD0042A12E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23961F254ADD0042A12E /* HomeViewController.swift */; };
+		653F23A21F254ADD0042A12E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653F23A01F254ADD0042A12E /* LaunchScreen.storyboard */; };
+		653F23AD1F254ADD0042A12E /* xcPetalV3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23AC1F254ADD0042A12E /* xcPetalV3Tests.swift */; };
+		653F23B81F254ADD0042A12E /* xcPetalV3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23B71F254ADD0042A12E /* xcPetalV3UITests.swift */; };
+		653F23C91F254BF10042A12E /* VitalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23C81F254BF10042A12E /* VitalsViewController.swift */; };
+		653F23CB1F254CB50042A12E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653F23CA1F254CB50042A12E /* Main.storyboard */; };
+		653F23CD1F254CCD0042A12E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653F23CC1F254CCD0042A12E /* Assets.xcassets */; };
+		653F23CF1F254D470042A12E /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F23CE1F254D470042A12E /* MarketViewController.swift */; };
+		AF4315EF1F9E97FE00C66818 /* NewVitalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4315EE1F9E97FE00C66818 /* NewVitalsController.swift */; };
+		AF76053D1F30EE1600310721 /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76053C1F30EE1600310721 /* AWS.swift */; };
+		AF76053F1F30EE3100310721 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76053E1F30EE3100310721 /* Constants.swift */; };
+		AF7605411F30F5BB00310721 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7605401F30F5BB00310721 /* Tier.swift */; };
+		AFE419251F3C16F6002C4499 /* FirstPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE419241F3C16F6002C4499 /* FirstPopUpViewController.swift */; };
+		AFE419271F3C1B02002C4499 /* AlphaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE419261F3C1B02002C4499 /* AlphaViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		653F23A91F254ADD0042A12E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 653F23891F254ADD0042A12E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 653F23901F254ADD0042A12E;
+			remoteInfo = xcPetalV3;
+		};
+		653F23B41F254ADD0042A12E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 653F23891F254ADD0042A12E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 653F23901F254ADD0042A12E;
+			remoteInfo = xcPetalV3;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		13104FDE5203330C893E6243 /* Pods_xcPetalV3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xcPetalV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44D255C9270E614E52E4ADD8 /* Pods-xcPetalV3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xcPetalV3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-xcPetalV3/Pods-xcPetalV3.debug.xcconfig"; sourceTree = "<group>"; };
+		653F23911F254ADD0042A12E /* xcPetalV3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xcPetalV3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		653F23941F254ADD0042A12E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		653F23961F254ADD0042A12E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		653F23A11F254ADD0042A12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		653F23A31F254ADD0042A12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		653F23A81F254ADD0042A12E /* xcPetalV3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xcPetalV3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		653F23AC1F254ADD0042A12E /* xcPetalV3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xcPetalV3Tests.swift; sourceTree = "<group>"; };
+		653F23AE1F254ADD0042A12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		653F23B31F254ADD0042A12E /* xcPetalV3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xcPetalV3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		653F23B71F254ADD0042A12E /* xcPetalV3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xcPetalV3UITests.swift; sourceTree = "<group>"; };
+		653F23B91F254ADD0042A12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		653F23C81F254BF10042A12E /* VitalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VitalsViewController.swift; path = ../VitalsViewController.swift; sourceTree = "<group>"; };
+		653F23CA1F254CB50042A12E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		653F23CC1F254CCD0042A12E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		653F23CE1F254D470042A12E /* MarketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
+		AF4315EE1F9E97FE00C66818 /* NewVitalsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewVitalsController.swift; sourceTree = "<group>"; };
+		AF76053C1F30EE1600310721 /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
+		AF76053E1F30EE3100310721 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AF7605401F30F5BB00310721 /* Tier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
+		AFE419241F3C16F6002C4499 /* FirstPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPopUpViewController.swift; sourceTree = "<group>"; };
+		AFE419261F3C1B02002C4499 /* AlphaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaViewController.swift; sourceTree = "<group>"; };
+		CF0059B39C8979262B5D9E7F /* Pods-xcPetalV3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xcPetalV3.release.xcconfig"; path = "Pods/Target Support Files/Pods-xcPetalV3/Pods-xcPetalV3.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		653F238E1F254ADD0042A12E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A556C246443D2D0456402FE /* Pods_xcPetalV3.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23A51F254ADD0042A12E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23B01F254ADD0042A12E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		653F23881F254ADD0042A12E = {
+			isa = PBXGroup;
+			children = (
+				653F23931F254ADD0042A12E /* xcPetalV3 */,
+				653F23AB1F254ADD0042A12E /* xcPetalV3Tests */,
+				653F23B61F254ADD0042A12E /* xcPetalV3UITests */,
+				653F23921F254ADD0042A12E /* Products */,
+				E5751E1BEFDC18755E54D4BC /* Pods */,
+				9350F3DD32B17D33C05738C4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		653F23921F254ADD0042A12E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				653F23911F254ADD0042A12E /* xcPetalV3.app */,
+				653F23A81F254ADD0042A12E /* xcPetalV3Tests.xctest */,
+				653F23B31F254ADD0042A12E /* xcPetalV3UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		653F23931F254ADD0042A12E /* xcPetalV3 */ = {
+			isa = PBXGroup;
+			children = (
+				AF7605401F30F5BB00310721 /* Tier.swift */,
+				AF76053C1F30EE1600310721 /* AWS.swift */,
+				AF76053E1F30EE3100310721 /* Constants.swift */,
+				653F23C51F254BAC0042A12E /* Controllers */,
+				653F23941F254ADD0042A12E /* AppDelegate.swift */,
+				653F23A01F254ADD0042A12E /* LaunchScreen.storyboard */,
+				653F23CC1F254CCD0042A12E /* Assets.xcassets */,
+				653F23CA1F254CB50042A12E /* Main.storyboard */,
+				653F23A31F254ADD0042A12E /* Info.plist */,
+			);
+			path = xcPetalV3;
+			sourceTree = "<group>";
+		};
+		653F23AB1F254ADD0042A12E /* xcPetalV3Tests */ = {
+			isa = PBXGroup;
+			children = (
+				653F23AC1F254ADD0042A12E /* xcPetalV3Tests.swift */,
+				653F23AE1F254ADD0042A12E /* Info.plist */,
+			);
+			path = xcPetalV3Tests;
+			sourceTree = "<group>";
+		};
+		653F23B61F254ADD0042A12E /* xcPetalV3UITests */ = {
+			isa = PBXGroup;
+			children = (
+				653F23B71F254ADD0042A12E /* xcPetalV3UITests.swift */,
+				653F23B91F254ADD0042A12E /* Info.plist */,
+			);
+			path = xcPetalV3UITests;
+			sourceTree = "<group>";
+		};
+		653F23C51F254BAC0042A12E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFE419261F3C1B02002C4499 /* AlphaViewController.swift */,
+				653F23C81F254BF10042A12E /* VitalsViewController.swift */,
+				AFE419241F3C16F6002C4499 /* FirstPopUpViewController.swift */,
+				653F23961F254ADD0042A12E /* HomeViewController.swift */,
+				653F23CE1F254D470042A12E /* MarketViewController.swift */,
+				AF4315EE1F9E97FE00C66818 /* NewVitalsController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9350F3DD32B17D33C05738C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13104FDE5203330C893E6243 /* Pods_xcPetalV3.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5751E1BEFDC18755E54D4BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44D255C9270E614E52E4ADD8 /* Pods-xcPetalV3.debug.xcconfig */,
+				CF0059B39C8979262B5D9E7F /* Pods-xcPetalV3.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		653F23901F254ADD0042A12E /* xcPetalV3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 653F23BC1F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3" */;
+			buildPhases = (
+				DE46409F8C515D78989ADCE0 /* [CP] Check Pods Manifest.lock */,
+				653F238D1F254ADD0042A12E /* Sources */,
+				653F238E1F254ADD0042A12E /* Frameworks */,
+				653F238F1F254ADD0042A12E /* Resources */,
+				AF26680EF7D49DB278697790 /* [CP] Embed Pods Frameworks */,
+				A9D2EFE7DA546BF6E1FEEE0B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = xcPetalV3;
+			productName = xcPetalV3;
+			productReference = 653F23911F254ADD0042A12E /* xcPetalV3.app */;
+			productType = "com.apple.product-type.application";
+		};
+		653F23A71F254ADD0042A12E /* xcPetalV3Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 653F23BF1F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3Tests" */;
+			buildPhases = (
+				653F23A41F254ADD0042A12E /* Sources */,
+				653F23A51F254ADD0042A12E /* Frameworks */,
+				653F23A61F254ADD0042A12E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				653F23AA1F254ADD0042A12E /* PBXTargetDependency */,
+			);
+			name = xcPetalV3Tests;
+			productName = xcPetalV3Tests;
+			productReference = 653F23A81F254ADD0042A12E /* xcPetalV3Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		653F23B21F254ADD0042A12E /* xcPetalV3UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 653F23C21F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3UITests" */;
+			buildPhases = (
+				653F23AF1F254ADD0042A12E /* Sources */,
+				653F23B01F254ADD0042A12E /* Frameworks */,
+				653F23B11F254ADD0042A12E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				653F23B51F254ADD0042A12E /* PBXTargetDependency */,
+			);
+			name = xcPetalV3UITests;
+			productName = xcPetalV3UITests;
+			productReference = 653F23B31F254ADD0042A12E /* xcPetalV3UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		653F23891F254ADD0042A12E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Okavango Systems";
+				TargetAttributes = {
+					653F23901F254ADD0042A12E = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = MP37RU374V;
+						ProvisioningStyle = Automatic;
+					};
+					653F23A71F254ADD0042A12E = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 46DQ3XJY85;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 653F23901F254ADD0042A12E;
+					};
+					653F23B21F254ADD0042A12E = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 46DQ3XJY85;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 653F23901F254ADD0042A12E;
+					};
+				};
+			};
+			buildConfigurationList = 653F238C1F254ADD0042A12E /* Build configuration list for PBXProject "xcPetalV3" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 653F23881F254ADD0042A12E;
+			productRefGroup = 653F23921F254ADD0042A12E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				653F23901F254ADD0042A12E /* xcPetalV3 */,
+				653F23A71F254ADD0042A12E /* xcPetalV3Tests */,
+				653F23B21F254ADD0042A12E /* xcPetalV3UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		653F238F1F254ADD0042A12E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				653F23A21F254ADD0042A12E /* LaunchScreen.storyboard in Resources */,
+				653F23CD1F254CCD0042A12E /* Assets.xcassets in Resources */,
+				653F23CB1F254CB50042A12E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23A61F254ADD0042A12E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23B11F254ADD0042A12E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9D2EFE7DA546BF6E1FEEE0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-xcPetalV3/Pods-xcPetalV3-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF26680EF7D49DB278697790 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-xcPetalV3/Pods-xcPetalV3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE46409F8C515D78989ADCE0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		653F238D1F254ADD0042A12E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				653F23971F254ADD0042A12E /* HomeViewController.swift in Sources */,
+				653F23951F254ADD0042A12E /* AppDelegate.swift in Sources */,
+				653F23CF1F254D470042A12E /* MarketViewController.swift in Sources */,
+				AFE419271F3C1B02002C4499 /* AlphaViewController.swift in Sources */,
+				AF76053D1F30EE1600310721 /* AWS.swift in Sources */,
+				AFE419251F3C16F6002C4499 /* FirstPopUpViewController.swift in Sources */,
+				653F23C91F254BF10042A12E /* VitalsViewController.swift in Sources */,
+				AF4315EF1F9E97FE00C66818 /* NewVitalsController.swift in Sources */,
+				AF76053F1F30EE3100310721 /* Constants.swift in Sources */,
+				AF7605411F30F5BB00310721 /* Tier.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23A41F254ADD0042A12E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				653F23AD1F254ADD0042A12E /* xcPetalV3Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		653F23AF1F254ADD0042A12E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				653F23B81F254ADD0042A12E /* xcPetalV3UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		653F23AA1F254ADD0042A12E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 653F23901F254ADD0042A12E /* xcPetalV3 */;
+			targetProxy = 653F23A91F254ADD0042A12E /* PBXContainerItemProxy */;
+		};
+		653F23B51F254ADD0042A12E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 653F23901F254ADD0042A12E /* xcPetalV3 */;
+			targetProxy = 653F23B41F254ADD0042A12E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		653F23A01F254ADD0042A12E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				653F23A11F254ADD0042A12E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		653F23BA1F254ADD0042A12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		653F23BB1F254ADD0042A12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		653F23BD1F254ADD0042A12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44D255C9270E614E52E4ADD8 /* Pods-xcPetalV3.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MP37RU374V;
+				INFOPLIST_FILE = xcPetalV3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PetalV3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		653F23BE1F254ADD0042A12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF0059B39C8979262B5D9E7F /* Pods-xcPetalV3.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MP37RU374V;
+				INFOPLIST_FILE = xcPetalV3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PetalV3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		653F23C01F254ADD0042A12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 46DQ3XJY85;
+				INFOPLIST_FILE = xcPetalV3Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifTest.xcPetalV3Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/xcPetalV3.app/xcPetalV3";
+			};
+			name = Debug;
+		};
+		653F23C11F254ADD0042A12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 46DQ3XJY85;
+				INFOPLIST_FILE = xcPetalV3Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifTest.xcPetalV3Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/xcPetalV3.app/xcPetalV3";
+			};
+			name = Release;
+		};
+		653F23C31F254ADD0042A12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 46DQ3XJY85;
+				INFOPLIST_FILE = xcPetalV3UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifTest.xcPetalV3UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = xcPetalV3;
+			};
+			name = Debug;
+		};
+		653F23C41F254ADD0042A12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 46DQ3XJY85;
+				INFOPLIST_FILE = xcPetalV3UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifTest.xcPetalV3UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = xcPetalV3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		653F238C1F254ADD0042A12E /* Build configuration list for PBXProject "xcPetalV3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				653F23BA1F254ADD0042A12E /* Debug */,
+				653F23BB1F254ADD0042A12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		653F23BC1F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				653F23BD1F254ADD0042A12E /* Debug */,
+				653F23BE1F254ADD0042A12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		653F23BF1F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				653F23C01F254ADD0042A12E /* Debug */,
+				653F23C11F254ADD0042A12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		653F23C21F254ADD0042A12E /* Build configuration list for PBXNativeTarget "xcPetalV3UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				653F23C31F254ADD0042A12E /* Debug */,
+				653F23C41F254ADD0042A12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 653F23891F254ADD0042A12E /* Project object */;
+}

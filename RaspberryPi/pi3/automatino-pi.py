@@ -136,7 +136,8 @@ mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 #mqttc.on_log = on_log
 
-mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_NONE, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+mqttc.tls_insecure_set(True)
 
 mqttc.connect(awshost, awsport, keepalive=60)
 
@@ -212,7 +213,7 @@ def changeSchedule(new_schedule):
         print('Not a valid schedule 2')
         return
     for x in new_schedule:
-        print x
+        print (x)
         # check if profile exists in profiles
         # any way of making this not o(n^2) ??
         indices = False

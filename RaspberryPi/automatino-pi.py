@@ -40,19 +40,21 @@ keyPath = "privkey.pem"
 
 timer = 0
 
-# output pins
-LIGHT_PIN = 14
-FAN_PIN = 15
-HEAT_PIN = 18
+# output pins in GPIO
+FAN_PIN = 14
+EXHAUST_PIN = 15 # RXD
+HEAT_PIN = 23
 # BLUE_PIN = 23;
-EXHAUST_PIN = 23
-VALVE_PIN = 24
+VALVE_PIN = 18
+LIGHT_PIN = 24
 
-# input pins
+# input pins in GPIO
 DHT_PIN = 2
+HIGH_WATER_PIN = 16
+MEDIUM_WATER_PIN = 20
+TRAY_LEVEL_PIN = 21
 # RIBBON
 # RESERVOIR_SENSOR
-TRAY_LEVEL_PIN = 22
 
 # initialize GPIO
 GPIO.setwarnings(False)
@@ -63,7 +65,13 @@ GPIO.setup(FAN_PIN, GPIO.OUT)
 GPIO.setup(HEAT_PIN, GPIO.OUT)
 GPIO.setup(EXHAUST_PIN, GPIO.OUT)
 GPIO.setup(VALVE_PIN, GPIO.OUT)
+GPIO.output(LIGHT_PIN, False)
+GPIO.output(FAN_PIN, False)
+GPIO.output(HEAT_PIN, False)
+GPIO.output(EXHAUST_PIN, False)
 GPIO.setup(TRAY_LEVEL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(HIGH_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(MEDIUM_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 light_pwm = GPIO.PWM(LIGHT_PIN, 100)
 light_pwm.start(0)
 fan_pwm = GPIO.PWM(FAN_PIN, 100);
@@ -74,9 +82,9 @@ exhaust_pwm = GPIO.PWM(EXHAUST_PIN, 100);
 exhaust_pwm.start(0)
 
 # MCP setup
-SPI_PORT   = 0
-SPI_DEVICE = 0
-mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+# SPI_PORT   = 0
+# SPI_DEVICE = 0
+# mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # variables
 temperature = 0
@@ -383,50 +391,47 @@ def tray_update():
         valve = 0
         print("valve closed")
 
-while True:
-    sleep(1)
-    value = mcp.read_adc(0)
-    change_light(value/100 * 10)
-
 # while True:
-#     global timer
-#     sleep(3)
-#     timer = timer + 1
-#     # check for outstanding deltas every 7.5 seconds
-#     if timer >= 5:
-#         mqttc.publish("$aws/things/" + thingName + "/shadow/get","", qos=1)
-#         timer = 0
-#     # mqttc.loop(timeout=1.0, max_packets=1)
-#     update_current_profile()
-#     tray_update()
-#     humidity, temperature = get_readings()
-
-#     # maybe only do the below things if there's a change in something?
+#     sleep(1)
 #     value = mcp.read_adc(0)
-#     print("light ribbon value: " + str(value))
 #     change_light(value/100 * 10)
-#     if auto == 1:
-#         automate()
-#     else:
-#         # custom write
-#         pass
-#     if light > 0 or fan > 0:
-#         analog_write(exhaust_pwm, 50)
-#     if connflag == True:
-#         if humidity is not None and temperature is not None:
-#             mqttc.publish("$aws/things/" + thingName + "/shadow/update",
-#                 "{\"state\":{\"reported\":{\"temperature\": " + str(temperature) + ", \"humidity\":" + str(humidity) +
-#                 ", \"tempSP\":" + str(current_profile['temperatureSP']) + 
-#                 ", \"light\":" + str(light) + 
-#                 ", \"light_override\":" + str(light_override) + 
-#                 ", \"auto\":" + str(auto) + 
-#                 ", \"heater\":" + str(heater) + ", \"fan\":" + str(fan) + "}}}", qos=1)
-#             print("msg sent: temperature  %.2f; humidity %.2f" % (temperature, humidity))
-#         else:
-#             print("Failed to read sensor")
-#             # publish a message saying sensor isn't working
-#     else:
-#         print("waiting for connection...")
-#         mqttc.reconnect()
+
+while True:
+    global timer
+    sleep(3)
+    timer = timer + 1
+    # check for outstanding deltas every 7.5 seconds
+    if timer >= 5:
+        mqttc.publish("$aws/things/" + thingName + "/shadow/get","", qos=1)
+        timer = 0
+    # mqttc.loop(timeout=1.0, max_packets=1)
+    update_current_profile()
+    tray_update()
+    humidity, temperature = get_readings()
+
+    # maybe only do the below things if there's a change in something?
+    if auto == 1:
+        automate()
+    else:
+        # custom write
+        pass
+    if light > 0 or fan > 0:
+        analog_write(exhaust_pwm, 50)
+    if connflag == True:
+        if humidity is not None and temperature is not None:
+            mqttc.publish("$aws/things/" + thingName + "/shadow/update",
+                "{\"state\":{\"reported\":{\"temperature\": " + str(temperature) + ", \"humidity\":" + str(humidity) +
+                ", \"tempSP\":" + str(current_profile['temperatureSP']) + 
+                ", \"light\":" + str(light) + 
+                ", \"light_override\":" + str(light_override) + 
+                ", \"auto\":" + str(auto) + 
+                ", \"heater\":" + str(heater) + ", \"fan\":" + str(fan) + "}}}", qos=1)
+            print("msg sent: temperature  %.2f; humidity %.2f" % (temperature, humidity))
+        else:
+            print("Failed to read sensor")
+            # publish a message saying sensor isn't working
+    else:
+        print("waiting for connection...")
+        mqttc.reconnect()
 
 GPIO.cleanup()

@@ -11,7 +11,7 @@ import AWSIoT
 import SwiftyJSON
 import CircularSlider
 
-let thingName = "pi3"
+let thingName = "pi2"
 var counter = 0
 
 class ViewController: UIViewController {
@@ -181,7 +181,6 @@ class ViewController: UIViewController {
                 self.lightSliderWaitingForSync = 0
                 self.lightSlider.minimumTrackTintColor = UIColor.lightGray
             }
-            
         }
     }
     

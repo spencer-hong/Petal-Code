@@ -1,0 +1,2476 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>AWSRekognition Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">AWS Mobile SDK for iOS v2.5.9 </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Amazon Web Services, Inc.</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/configuration">configuration</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/RekognitionForKey:">+ RekognitionForKey:</option>
+		
+		<option value="//api/name/defaultRekognition">+ defaultRekognition</option>
+		
+		<option value="//api/name/registerRekognitionWithConfiguration:forKey:">+ registerRekognitionWithConfiguration:forKey:</option>
+		
+		<option value="//api/name/removeRekognitionForKey:">+ removeRekognitionForKey:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/compareFaces:">- compareFaces:</option>
+		
+		<option value="//api/name/compareFaces:completionHandler:">- compareFaces:completionHandler:</option>
+		
+		<option value="//api/name/createCollection:">- createCollection:</option>
+		
+		<option value="//api/name/createCollection:completionHandler:">- createCollection:completionHandler:</option>
+		
+		<option value="//api/name/deleteCollection:">- deleteCollection:</option>
+		
+		<option value="//api/name/deleteCollection:completionHandler:">- deleteCollection:completionHandler:</option>
+		
+		<option value="//api/name/deleteFaces:">- deleteFaces:</option>
+		
+		<option value="//api/name/deleteFaces:completionHandler:">- deleteFaces:completionHandler:</option>
+		
+		<option value="//api/name/detectFaces:">- detectFaces:</option>
+		
+		<option value="//api/name/detectFaces:completionHandler:">- detectFaces:completionHandler:</option>
+		
+		<option value="//api/name/detectLabels:">- detectLabels:</option>
+		
+		<option value="//api/name/detectLabels:completionHandler:">- detectLabels:completionHandler:</option>
+		
+		<option value="//api/name/detectModerationLabels:">- detectModerationLabels:</option>
+		
+		<option value="//api/name/detectModerationLabels:completionHandler:">- detectModerationLabels:completionHandler:</option>
+		
+		<option value="//api/name/indexFaces:">- indexFaces:</option>
+		
+		<option value="//api/name/indexFaces:completionHandler:">- indexFaces:completionHandler:</option>
+		
+		<option value="//api/name/listCollections:">- listCollections:</option>
+		
+		<option value="//api/name/listCollections:completionHandler:">- listCollections:completionHandler:</option>
+		
+		<option value="//api/name/listFaces:">- listFaces:</option>
+		
+		<option value="//api/name/listFaces:completionHandler:">- listFaces:completionHandler:</option>
+		
+		<option value="//api/name/searchFaces:">- searchFaces:</option>
+		
+		<option value="//api/name/searchFaces:completionHandler:">- searchFaces:completionHandler:</option>
+		
+		<option value="//api/name/searchFacesByImage:">- searchFacesByImage:</option>
+		
+		<option value="//api/name/searchFacesByImage:completionHandler:">- searchFacesByImage:completionHandler:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">AWSRekognition Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/AWSService.html">AWSService</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>AWSRekognitionService.h<br />AWSRekognitionService.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>This is the Amazon Rekognition API reference.</p>
+
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/configuration" title="configuration"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configuration">&nbsp;&nbsp;configuration</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The service configuration used to instantiate this service client.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) AWSServiceConfiguration *configuration</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="warning"><p><strong>Warning:</strong> Once the client is instantiated, do not modify the configuration object. It may cause unspecified behaviors.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultRekognition" title="defaultRekognition"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultRekognition">+&nbsp;defaultRekognition</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the singleton service client. If the singleton object does not exist, the SDK instantiates the default service client with <code>defaultServiceConfiguration</code> from <code>[AWSServiceManager defaultServiceManager]</code>. The reference to this object is maintained by the SDK, and you do not need to retain it manually.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)defaultRekognition</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The default service client.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>For example, set the default service configuration in <code>- application:didFinishLaunchingWithOptions:</code></p>
+
+<p><em>Swift</em></p>
+
+<pre><code> func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
+    let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
+    AWSServiceManager.default().defaultServiceConfiguration = configuration
+
+    return true
+}
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1
+                                                                                                      identityPoolId:@"YourIdentityPoolId"];
+      AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1
+                                                                           credentialsProvider:credentialsProvider];
+      [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
+
+      return YES;
+  }
+</code></pre>
+
+<p>Then call the following to get the default service client:</p>
+
+<p><em>Swift</em></p>
+
+<pre><code> let Rekognition = AWSRekognition.default()
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> AWSRekognition *Rekognition = [AWSRekognition defaultRekognition];
+</code></pre>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/registerRekognitionWithConfiguration:forKey:" title="registerRekognitionWithConfiguration:forKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/registerRekognitionWithConfiguration:forKey:">+&nbsp;registerRekognitionWithConfiguration:forKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a service client with the given service configuration and registers it for the key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)registerRekognitionWithConfiguration:(AWSServiceConfiguration *)<em>configuration</em> forKey:(NSString *)<em>key</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>configuration</code></th>
+						<td><p>A service configuration object.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>key</code></th>
+						<td><p>A string to identify the service client.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>For example, set the default service configuration in <code>- application:didFinishLaunchingWithOptions:</code></p>
+
+<p><em>Swift</em></p>
+
+<pre><code> func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
+    let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
+    AWSRekognition.register(with: configuration!, forKey: "USWest2Rekognition")
+
+    return true
+}
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1
+                                                                                                     identityPoolId:@"YourIdentityPoolId"];
+     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
+                                                                          credentialsProvider:credentialsProvider];
+
+     [AWSRekognition registerRekognitionWithConfiguration:configuration forKey:@"USWest2Rekognition"];
+
+     return YES;
+ }
+</code></pre>
+
+<p>Then call the following to get the service client:</p>
+
+<p><em>Swift</em></p>
+
+<pre><code> let Rekognition = AWSRekognition(forKey: "USWest2Rekognition")
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> AWSRekognition *Rekognition = [AWSRekognition RekognitionForKey:@"USWest2Rekognition"];
+</code></pre><div class="warning"><p><strong>Warning:</strong> After calling this method, do not modify the configuration object. It may cause unspecified behaviors.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/RekognitionForKey:" title="RekognitionForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/RekognitionForKey:">+&nbsp;RekognitionForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Retrieves the service client associated with the key. You need to call <code>+ registerRekognitionWithConfiguration:forKey:</code> before invoking this method.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)RekognitionForKey:(NSString *)<em>key</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>key</code></th>
+						<td><p>A string to identify the service client.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of the service client.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>For example, set the default service configuration in <code>- application:didFinishLaunchingWithOptions:</code></p>
+
+<p><em>Swift</em></p>
+
+<pre><code> func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
+    let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
+    AWSRekognition.register(with: configuration!, forKey: "USWest2Rekognition")
+
+    return true
+}
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1
+                                                                                                     identityPoolId:@"YourIdentityPoolId"];
+     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
+                                                                          credentialsProvider:credentialsProvider];
+
+     [AWSRekognition registerRekognitionWithConfiguration:configuration forKey:@"USWest2Rekognition"];
+
+     return YES;
+ }
+</code></pre>
+
+<p>Then call the following to get the service client:</p>
+
+<p><em>Swift</em></p>
+
+<pre><code> let Rekognition = AWSRekognition(forKey: "USWest2Rekognition")
+</code></pre>
+
+<p><em>Objective-C</em></p>
+
+<pre><code> AWSRekognition *Rekognition = [AWSRekognition RekognitionForKey:@"USWest2Rekognition"];
+</code></pre>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeRekognitionForKey:" title="removeRekognitionForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeRekognitionForKey:">+&nbsp;removeRekognitionForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the service client associated with the key and release it.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)removeRekognitionForKey:(NSString *)<em>key</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>key</code></th>
+						<td><p>A string to identify the service client.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="warning"><p><strong>Warning:</strong> Before calling this method, make sure no method is running on this client.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/compareFaces:" title="compareFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/compareFaces:">&ndash;&nbsp;compareFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p>
+
+
+<p><note><p> If the source image contains multiple faces, the service detects the largest face and uses it to compare with each face detected in the target image. </p></note><p>In response, the operation returns an array of face matches ordered by similarity score with the highest similarity scores first. For each face match, the response provides a bounding box of the face and <code>confidence</code> value (indicating the level of confidence that the bounding box contains a face). The response also provides a <code>similarity</code> score, which indicates how closely the faces match. </p><note><p>By default, only faces with the similarity score of greater than or equal to 80% are returned in the response. You can change this value.</p></note><p>In addition to the face matches, the response returns information about the face in the source image, including the bounding box of the face and confidence value.</p><note><p> This is a stateless API operation. That is, the operation does not persist any data.</p></note><p>For an example, see <a>get-started-exercise-compare-faces</a></p><p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionCompareFacesResponse*&gt; *)compareFaces:(AWSRekognitionCompareFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the CompareFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionCompareFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCompareFacesRequest.html">AWSRekognitionCompareFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCompareFacesResponse.html">AWSRekognitionCompareFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/compareFaces:completionHandler:" title="compareFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/compareFaces:completionHandler:">&ndash;&nbsp;compareFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p>
+
+
+<p><note><p> If the source image contains multiple faces, the service detects the largest face and uses it to compare with each face detected in the target image. </p></note><p>In response, the operation returns an array of face matches ordered by similarity score with the highest similarity scores first. For each face match, the response provides a bounding box of the face and <code>confidence</code> value (indicating the level of confidence that the bounding box contains a face). The response also provides a <code>similarity</code> score, which indicates how closely the faces match. </p><note><p>By default, only faces with the similarity score of greater than or equal to 80% are returned in the response. You can change this value.</p></note><p>In addition to the face matches, the response returns information about the face in the source image, including the bounding box of the face and confidence value.</p><note><p> This is a stateless API operation. That is, the operation does not persist any data.</p></note><p>For an example, see <a>get-started-exercise-compare-faces</a></p><p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)compareFaces:(AWSRekognitionCompareFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionCompareFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the CompareFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCompareFacesRequest.html">AWSRekognitionCompareFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCompareFacesResponse.html">AWSRekognitionCompareFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCollection:" title="createCollection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCollection:">&ndash;&nbsp;createCollection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a collection in an AWS Region. You can add faces to the collection using the operation. </p>
+
+
+<p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p>
+
+
+<p>For an example, see <a>example1</a>. </p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionCreateCollectionResponse*&gt; *)createCollection:(AWSRekognitionCreateCollectionRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the CreateCollection service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionCreateCollectionResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceAlreadyExists</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCreateCollectionRequest.html">AWSRekognitionCreateCollectionRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCreateCollectionResponse.html">AWSRekognitionCreateCollectionResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCollection:completionHandler:" title="createCollection:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCollection:completionHandler:">&ndash;&nbsp;createCollection:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a collection in an AWS Region. You can add faces to the collection using the operation. </p>
+
+
+<p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p>
+
+
+<p>For an example, see <a>example1</a>. </p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)createCollection:(AWSRekognitionCreateCollectionRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionCreateCollectionResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the CreateCollection service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceAlreadyExists</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCreateCollectionRequest.html">AWSRekognitionCreateCollectionRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionCreateCollectionResponse.html">AWSRekognitionCreateCollectionResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteCollection:" title="deleteCollection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteCollection:">&ndash;&nbsp;deleteCollection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Deletes the specified collection. Note that this operation removes all faces in the collection. For an example, see <a>example1</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:DeleteCollection</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionDeleteCollectionResponse*&gt; *)deleteCollection:(AWSRekognitionDeleteCollectionRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DeleteCollection service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionDeleteCollectionResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteCollectionRequest.html">AWSRekognitionDeleteCollectionRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteCollectionResponse.html">AWSRekognitionDeleteCollectionResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteCollection:completionHandler:" title="deleteCollection:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteCollection:completionHandler:">&ndash;&nbsp;deleteCollection:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Deletes the specified collection. Note that this operation removes all faces in the collection. For an example, see <a>example1</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:DeleteCollection</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deleteCollection:(AWSRekognitionDeleteCollectionRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionDeleteCollectionResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DeleteCollection service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteCollectionRequest.html">AWSRekognitionDeleteCollectionRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteCollectionResponse.html">AWSRekognitionDeleteCollectionResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteFaces:" title="deleteFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteFaces:">&ndash;&nbsp;deleteFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Deletes faces from a collection. You specify a collection ID and an array of face IDs to remove from the collection.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:DeleteFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionDeleteFacesResponse*&gt; *)deleteFaces:(AWSRekognitionDeleteFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DeleteFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionDeleteFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteFacesRequest.html">AWSRekognitionDeleteFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteFacesResponse.html">AWSRekognitionDeleteFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteFaces:completionHandler:" title="deleteFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteFaces:completionHandler:">&ndash;&nbsp;deleteFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Deletes faces from a collection. You specify a collection ID and an array of face IDs to remove from the collection.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:DeleteFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deleteFaces:(AWSRekognitionDeleteFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionDeleteFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DeleteFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteFacesRequest.html">AWSRekognitionDeleteFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDeleteFacesResponse.html">AWSRekognitionDeleteFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectFaces:" title="detectFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectFaces:">&ndash;&nbsp;detectFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects faces within an image (JPEG or PNG) that is provided as input.</p>
+
+
+<p> For each face detected, the operation returns face details including a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), gender, presence of beard, sunglasses, etc. </p>
+
+
+<p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm may not detect the faces or might detect faces with lower confidence. </p>
+
+
+<p><note><p>This is a stateless API operation. That is, the operation does not persist any data.</p></note><p>For an example, see <a>get-started-exercise-detect-faces</a>.</p><p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionDetectFacesResponse*&gt; *)detectFaces:(AWSRekognitionDetectFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionDetectFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectFacesRequest.html">AWSRekognitionDetectFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectFacesResponse.html">AWSRekognitionDetectFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectFaces:completionHandler:" title="detectFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectFaces:completionHandler:">&ndash;&nbsp;detectFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects faces within an image (JPEG or PNG) that is provided as input.</p>
+
+
+<p> For each face detected, the operation returns face details including a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), gender, presence of beard, sunglasses, etc. </p>
+
+
+<p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm may not detect the faces or might detect faces with lower confidence. </p>
+
+
+<p><note><p>This is a stateless API operation. That is, the operation does not persist any data.</p></note><p>For an example, see <a>get-started-exercise-detect-faces</a>.</p><p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)detectFaces:(AWSRekognitionDetectFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionDetectFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectFacesRequest.html">AWSRekognitionDetectFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectFacesResponse.html">AWSRekognitionDetectFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectLabels:" title="detectLabels:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectLabels:">&ndash;&nbsp;detectLabels:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p>
+
+
+<p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p>
+
+
+<p><code>{Name: lighthouse, Confidence: 98.4629}</code></p>
+
+
+<p><code>{Name: rock,Confidence: 79.2097}</code></p>
+
+
+<p><code> {Name: sea,Confidence: 75.061}</code></p>
+
+
+<p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p>
+
+
+<p><code>{Name: flower,Confidence: 99.0562}</code></p>
+
+
+<p><code>{Name: plant,Confidence: 99.0562}</code></p>
+
+
+<p><code>{Name: tulip,Confidence: 99.0562}</code></p>
+
+
+<p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p>
+
+
+<p>You can provide the input image as an S3 object or as base64-encoded bytes. In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p>
+
+
+<p><note><p>If the object detected is a person, the operation doesn&rsquo;t provide the same facial details that the <a>DetectFaces</a> operation provides.</p></note><p>This is a stateless API operation. That is, the operation does not persist any data.</p><p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionDetectLabelsResponse*&gt; *)detectLabels:(AWSRekognitionDetectLabelsRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectLabels service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionDetectLabelsResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectLabelsRequest.html">AWSRekognitionDetectLabelsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectLabelsResponse.html">AWSRekognitionDetectLabelsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectLabels:completionHandler:" title="detectLabels:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectLabels:completionHandler:">&ndash;&nbsp;detectLabels:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p>
+
+
+<p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p>
+
+
+<p><code>{Name: lighthouse, Confidence: 98.4629}</code></p>
+
+
+<p><code>{Name: rock,Confidence: 79.2097}</code></p>
+
+
+<p><code> {Name: sea,Confidence: 75.061}</code></p>
+
+
+<p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p>
+
+
+<p><code>{Name: flower,Confidence: 99.0562}</code></p>
+
+
+<p><code>{Name: plant,Confidence: 99.0562}</code></p>
+
+
+<p><code>{Name: tulip,Confidence: 99.0562}</code></p>
+
+
+<p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p>
+
+
+<p>You can provide the input image as an S3 object or as base64-encoded bytes. In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p>
+
+
+<p><note><p>If the object detected is a person, the operation doesn&rsquo;t provide the same facial details that the <a>DetectFaces</a> operation provides.</p></note><p>This is a stateless API operation. That is, the operation does not persist any data.</p><p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)detectLabels:(AWSRekognitionDetectLabelsRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionDetectLabelsResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectLabels service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectLabelsRequest.html">AWSRekognitionDetectLabelsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectLabelsResponse.html">AWSRekognitionDetectLabelsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectModerationLabels:" title="detectModerationLabels:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectModerationLabels:">&ndash;&nbsp;detectModerationLabels:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p>
+
+
+<p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionDetectModerationLabelsResponse*&gt; *)detectModerationLabels:(AWSRekognitionDetectModerationLabelsRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectModerationLabels service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionDetectModerationLabelsResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectModerationLabelsRequest.html">AWSRekognitionDetectModerationLabelsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectModerationLabelsResponse.html">AWSRekognitionDetectModerationLabelsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/detectModerationLabels:completionHandler:" title="detectModerationLabels:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/detectModerationLabels:completionHandler:">&ndash;&nbsp;detectModerationLabels:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p>
+
+
+<p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)detectModerationLabels:(AWSRekognitionDetectModerationLabelsRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionDetectModerationLabelsResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the DetectModerationLabels service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectModerationLabelsRequest.html">AWSRekognitionDetectModerationLabelsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionDetectModerationLabelsResponse.html">AWSRekognitionDetectModerationLabelsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/indexFaces:" title="indexFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/indexFaces:">&ndash;&nbsp;indexFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects faces in the input image and adds them to the specified collection. </p>
+
+
+<p> Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. </p>
+
+
+<p>If you provide the optional <code>externalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p>
+
+
+<p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata. </p>
+
+
+<p>For an example, see <a>example2</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionIndexFacesResponse*&gt; *)indexFaces:(AWSRekognitionIndexFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the IndexFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionIndexFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionIndexFacesRequest.html">AWSRekognitionIndexFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionIndexFacesResponse.html">AWSRekognitionIndexFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/indexFaces:completionHandler:" title="indexFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/indexFaces:completionHandler:">&ndash;&nbsp;indexFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Detects faces in the input image and adds them to the specified collection. </p>
+
+
+<p> Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. </p>
+
+
+<p>If you provide the optional <code>externalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p>
+
+
+<p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata. </p>
+
+
+<p>For an example, see <a>example2</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)indexFaces:(AWSRekognitionIndexFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionIndexFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the IndexFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionIndexFacesRequest.html">AWSRekognitionIndexFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionIndexFacesResponse.html">AWSRekognitionIndexFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/listCollections:" title="listCollections:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/listCollections:">&ndash;&nbsp;listCollections:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns list of collection IDs in your account. If the result is truncated, the response also provides a <code>NextToken</code> that you can use in the subsequent request to fetch the next set of collection IDs.</p>
+
+
+<p>For an example, see <a>example1</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:ListCollections</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionListCollectionsResponse*&gt; *)listCollections:(AWSRekognitionListCollectionsRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the ListCollections service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionListCollectionsResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidPaginationToken</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListCollectionsRequest.html">AWSRekognitionListCollectionsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListCollectionsResponse.html">AWSRekognitionListCollectionsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/listCollections:completionHandler:" title="listCollections:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/listCollections:completionHandler:">&ndash;&nbsp;listCollections:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns list of collection IDs in your account. If the result is truncated, the response also provides a <code>NextToken</code> that you can use in the subsequent request to fetch the next set of collection IDs.</p>
+
+
+<p>For an example, see <a>example1</a>.</p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:ListCollections</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)listCollections:(AWSRekognitionListCollectionsRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionListCollectionsResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the ListCollections service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidPaginationToken</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListCollectionsRequest.html">AWSRekognitionListCollectionsRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListCollectionsResponse.html">AWSRekognitionListCollectionsResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/listFaces:" title="listFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/listFaces:">&ndash;&nbsp;listFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see <a>example3</a>. </p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:ListFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionListFacesResponse*&gt; *)listFaces:(AWSRekognitionListFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the ListFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionListFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidPaginationToken</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListFacesRequest.html">AWSRekognitionListFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListFacesResponse.html">AWSRekognitionListFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/listFaces:completionHandler:" title="listFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/listFaces:completionHandler:">&ndash;&nbsp;listFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see <a>example3</a>. </p>
+
+
+<p>This operation requires permissions to perform the <code>rekognition:ListFaces</code> action.</p>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)listFaces:(AWSRekognitionListFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionListFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the ListFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorInvalidPaginationToken</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListFacesRequest.html">AWSRekognitionListFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionListFacesResponse.html">AWSRekognitionListFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/searchFaces:" title="searchFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/searchFaces:">&ndash;&nbsp;searchFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>For a given input face ID, searches for matching faces in the collection the face belongs to. You get a face ID when you add a face to the collection using the <a>IndexFaces</a> operation. The operation compares the features of the input face with faces in the specified collection. </p>
+
+
+<p><note><p>You can also search faces without indexing faces by using the <code>SearchFacesByImage</code> operation.</p></note><p> The operation response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match that is found. Along with the metadata, the response also includes a <code>confidence</code> value for each face match, indicating the confidence that the specific face matches the input face. </p><p>For an example, see <a>example3</a>.</p><p>This operation requires permissions to perform the <code>rekognition:SearchFaces</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionSearchFacesResponse*&gt; *)searchFaces:(AWSRekognitionSearchFacesRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the SearchFaces service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionSearchFacesResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesRequest.html">AWSRekognitionSearchFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesResponse.html">AWSRekognitionSearchFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/searchFaces:completionHandler:" title="searchFaces:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/searchFaces:completionHandler:">&ndash;&nbsp;searchFaces:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>For a given input face ID, searches for matching faces in the collection the face belongs to. You get a face ID when you add a face to the collection using the <a>IndexFaces</a> operation. The operation compares the features of the input face with faces in the specified collection. </p>
+
+
+<p><note><p>You can also search faces without indexing faces by using the <code>SearchFacesByImage</code> operation.</p></note><p> The operation response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match that is found. Along with the metadata, the response also includes a <code>confidence</code> value for each face match, indicating the confidence that the specific face matches the input face. </p><p>For an example, see <a>example3</a>.</p><p>This operation requires permissions to perform the <code>rekognition:SearchFaces</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)searchFaces:(AWSRekognitionSearchFacesRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionSearchFacesResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the SearchFaces service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesRequest.html">AWSRekognitionSearchFacesRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesResponse.html">AWSRekognitionSearchFacesResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/searchFacesByImage:" title="searchFacesByImage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/searchFacesByImage:">&ndash;&nbsp;searchFacesByImage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p>
+
+
+<p><note><p> To search for all faces in an input image, you might first call the operation, and then use the face IDs returned in subsequent calls to the operation. </p><p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p></note><p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p><p>For an example, see <a>example3</a>.</p><p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AWSTask&lt;AWSRekognitionSearchFacesByImageResponse*&gt; *)searchFacesByImage:(AWSRekognitionSearchFacesByImageRequest *)<em>request</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the SearchFacesByImage service method.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An instance of <code>AWSTask</code>. On successful execution, <code>task.result</code> will contain an instance of <code>AWSRekognitionSearchFacesByImageResponse</code>. On failed execution, <code>task.error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesByImageRequest.html">AWSRekognitionSearchFacesByImageRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesByImageResponse.html">AWSRekognitionSearchFacesByImageResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/searchFacesByImage:completionHandler:" title="searchFacesByImage:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/searchFacesByImage:completionHandler:">&ndash;&nbsp;searchFacesByImage:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p>
+
+
+<p><note><p> To search for all faces in an input image, you might first call the operation, and then use the face IDs returned in subsequent calls to the operation. </p><p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p></note><p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p><p>For an example, see <a>example3</a>.</p><p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)searchFacesByImage:(AWSRekognitionSearchFacesByImageRequest *)<em>request</em> completionHandler:(void ( ^ _Nullable ) ( AWSRekognitionSearchFacesByImageResponse *_Nullable response , NSError *_Nullable error ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>request</code></th>
+						<td><p>A container for the necessary parameters to execute the SearchFacesByImage service method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completion handler to call when the load request is complete.
+                          <code>response</code> - A response object, or <code>nil</code> if the request failed.
+                          <code>error</code> - An error object that indicates why the request failed, or <code>nil</code> if the request was successful. On failed execution, <code>error</code> may contain an <code>NSError</code> with <code>AWSRekognitionErrorDomain</code> domain and the following error code: <code>AWSRekognitionErrorInvalidS3Object</code>, <code>AWSRekognitionErrorInvalidParameter</code>, <code>AWSRekognitionErrorImageTooLarge</code>, <code>AWSRekognitionErrorAccessDenied</code>, <code>AWSRekognitionErrorInternalServer</code>, <code>AWSRekognitionErrorThrottling</code>, <code>AWSRekognitionErrorProvisionedThroughputExceeded</code>, <code>AWSRekognitionErrorResourceNotFound</code>, <code>AWSRekognitionErrorInvalidImageFormat</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesByImageRequest.html">AWSRekognitionSearchFacesByImageRequest</a></p></code></li>
+					
+					<li><code><p><a href="../Classes/AWSRekognitionSearchFacesByImageResponse.html">AWSRekognitionSearchFacesByImageResponse</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AWSRekognitionService.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2017 Amazon Web Services, Inc. All rights reserved. Updated: 2017-07-13</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

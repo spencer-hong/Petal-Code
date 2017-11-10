@@ -1,0 +1,24 @@
+PODS:
+  - AWSCore (2.5.9)
+  - AWSIoT (2.5.9):
+    - AWSCore (= 2.5.9)
+  - CircularSlider (1.1.2)
+  - SwiftyJSON (3.1.4)
+  - SwiftyTimer (2.0.0)
+
+DEPENDENCIES:
+  - AWSIoT (~> 2.5.0)
+  - CircularSlider
+  - SwiftyJSON
+  - SwiftyTimer
+
+SPEC CHECKSUMS:
+  AWSCore: c71840dd51f271dc0af8de8fd6f352767ebde8b4
+  AWSIoT: c10cee06f05eab49aa429d332cb5ba5ddbaf7d65
+  CircularSlider: 448f9f7723b845ccd470dac41981feb192e20c50
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+
+PODFILE CHECKSUM: 5b95e44ef5e2c4a9591209f31fc228907ad9ec6a
+
+COCOAPODS: 1.2.1

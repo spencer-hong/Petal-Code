@@ -26,7 +26,7 @@ void setup()
   for (int i = 0; i < trays; i++) {
     pinMode(TRAY_PINS[i], INPUT);
     pinMode(VALVE_PINS[i], OUTPUT);
-  }  
+  }
 }
 
 void loop() {
