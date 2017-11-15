@@ -21,62 +21,60 @@ import atexit
 from time import sleep
 from random import uniform
 from pytz import timezone
+import client
 
-# Define Variables
 MQTT_PORT = 8883
 MQTT_KEEPALIVE_INTERVAL = 45
-
 MQTT_HOST = "a3nxzzc72rdj05.iot.us-east-2.amazonaws.com"
 CA_ROOT_CERT_FILE = "aws-iot-rootCA.crt"
 THING_CERT_FILE = "cert.pem"
 THING_PRIVATE_KEY = "privkey.pem"
 
-clientId = "pi6"
-thingName = "pi6"
-
 timer = 0
+box_type = 'styro'
+num_tiers = 1
 
-# output pins in GPIO
-FAN_PIN = 14
-EXHAUST_PIN = 15 # RXD
-HEAT_PIN = 18
-# BLUE_PIN = 23;
-VALVE_PIN = 23
-LIGHT_PIN = 24
+# RPi zeroW has 26 GPIO pins, 2...27
 
-# input pins in GPIO
-DHT_PIN = 2
-HIGH_WATER_PIN = 16
-MEDIUM_WATER_PIN = 20
-TRAY_LEVEL_PIN = 21
+LIGHT_PINS = [14,15,18,23,24]
+FAN_PINS = [25,8,7,12,16]
+EXHAUST_PINS = [20,21,26,19,13] # RXD
+HEAT_PINS = [6,5,11,9,10]
+DHT_PINS = [22,27,17,4,3]
+
+if box_type != 'styro':
+    VALVE_PIN = 23
+    HIGH_WATER_PIN = 16
+    MEDIUM_WATER_PIN = 20
+    TRAY_LEVEL_PIN = 21
+    GPIO.setup(VALVE_PIN, GPIO.OUT)
+    GPIO.output(VALVE_PIN, False)
+    GPIO.setup(TRAY_LEVEL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(HIGH_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(MEDIUM_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # initialize GPIO
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
-GPIO.setup(LIGHT_PIN, GPIO.OUT)
-GPIO.setup(FAN_PIN, GPIO.OUT)
-GPIO.setup(HEAT_PIN, GPIO.OUT)
-GPIO.setup(EXHAUST_PIN, GPIO.OUT)
-GPIO.setup(VALVE_PIN, GPIO.OUT)
-GPIO.output(LIGHT_PIN, False)
-GPIO.output(FAN_PIN, False)
-GPIO.output(HEAT_PIN, False)
-GPIO.output(EXHAUST_PIN, False)
-GPIO.output(VALVE_PIN, False)
-GPIO.setup(TRAY_LEVEL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(HIGH_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(MEDIUM_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-light_pwm = GPIO.PWM(LIGHT_PIN, 100)
-light_pwm.start(0)
-fan_pwm = GPIO.PWM(FAN_PIN, 100);
-fan_pwm.start(0)
-heater_pwm = GPIO.PWM(HEAT_PIN, 100);
-heater_pwm.start(0)
-exhaust_pwm = GPIO.PWM(EXHAUST_PIN, 100);
-exhaust_pwm.start(0)
-
-tiers = []
+light_pwm = fan_pwm = heater_pwm = exhaust_pwm = [None for x in range(num_tiers)]
+for i in range(num_tiers):
+    GPIO.setup(LIGHT_PINS[i], GPIO.OUT)
+    GPIO.setup(FAN_PINS[i], GPIO.OUT)
+    GPIO.setup(HEAT_PINS[i], GPIO.OUT)
+    GPIO.setup(EXHAUST_PINS[i], GPIO.OUT)
+    GPIO.output(LIGHT_PINS[i], False)
+    GPIO.output(FAN_PINS[i], False)
+    GPIO.output(HEAT_PINS[i], False)
+    GPIO.output(EXHAUST_PIN[i], False)
+    light_pwm[i] = GPIO.PWM(LIGHT_PINS[i], 100)
+    light_pwm[i].start(0)
+    fan_pwm[i] = GPIO.PWM(FAN_PINS[i], 100);
+    fan_pwm[i].start(0)
+    heater_pwm[i] = GPIO.PWM(HEAT_PIN[i], 100);
+    heater_pwm[i].start(0)
+    exhaust_pwm[i] = GPIO.PWM(EXHAUST_PIN[i], 100);
+    exhaust_pwm[i].start(0)
 
 # Some sick methods
 def digital_write(pin, val):
@@ -136,13 +134,14 @@ def reservoir_update():
         return 0
 
 class Tier(object):
-    def __init__(self, name, fan=None,light=None,heater=None,exhaust=None,blue=0,buffer_val=0.5,light_override=0,fan_override=0,heater_override=0,blue_override=0,auto=1,valve=0,mode=0):
+    def __init__(self, name, dht_pin, fan=None,light=None,heater=None,exhaust=None,blue=0,buffer_val=0.5,light_override=0,fan_override=0,heater_override=0,blue_override=0,auto=1,valve=0,mode=0):
         self.name = name
         self.temperature = None
         self.humidity = None
         self.blue,self.light_override,self.heater_override,self.blue_override = blue,light_override,heater_override,blue_override   
         self.light, self.fan, self.heater, self.exhaust = light, fan, heater, exhaust
         self.buffer_val,self.auto,self.valve,self.mode= buffer_val,auto,valve,mode
+        self.dht_pin = dht_pin
         self.profiles = [
             {'name': 'day', 'temperatureSP': 24, 'humiditySP': 50, 'light': 100, 'blue': 0}, 
             {'name': 'night','temperatureSP': 19, 'humiditySP': 50, 'light': 0, 'blue': 0},
@@ -266,19 +265,21 @@ class Tier(object):
         tempSP = self.current_profile['temperatureSP']
         if (self.temperature < tempSP - self.buffer_val):
             self.set_heater(100)
-            self.set_fan(0)
+            self.set_fan(100)
+            self.set_exhaust(0)
             self.mode = 1
         elif (temperature > tempSP + buffer_val):
             self.set_heater(0)
             self.set_fan(100)
+            self.set_exhaust(100)
             self.mode = 2
         elif ((temperature < tempSP + 0.2) & (temperature > tempSP - 0.2)):
             self.set_heater(0)
             self.set_fan(0)
+            self.set_exhaust(0)
             self.mode = 0
         if not self.light_override:
             self.set_light(self.current_profile['light'])
-        # analog_write(blue_pwm, current_profile['blue'])
         self.blue = self.current_profile['blue']
 
     def change_light(self, val):
@@ -306,7 +307,7 @@ class Tier(object):
         while (humreading is None or tempreading is None) and reading_counter < 5:
             print("reading")
             reading_counter = reading_counter + 1
-            humreading, tempreading = Adafruit_DHT.read(Adafruit_DHT.DHT22, DHT_PIN)
+            humreading, tempreading = Adafruit_DHT.read(Adafruit_DHT.DHT22, self.dht_pin)
         if (humreading is not None and tempreading is not None):
             self.humidity = humreading
             self.temperature = tempreading
@@ -337,18 +338,17 @@ class Tier(object):
             timer = 0
         # mqttc.loop(timeout=1.0, max_packets=1)
         self.update_current_profile()
-        self.tray_update()
-        water_level = reservoir_update()
+        if self.valve != None:
+            self.tray_update()
+        # water_level = reservoir_update()
         could_read = self.get_readings()
 
-        # maybe only do the below things if there's a change in something?
+        # Maybe only do the below things if there's a change in something?
         if self.auto == 1:
             self.automate()
         else:
-            # custom write
+            # Custom write
             pass
-        if self.light > 0 or self.fan > 0:
-            self.set_exhaust(50)
 
     def update_cloud(self):
         if self.get_readings():
@@ -359,88 +359,22 @@ class Tier(object):
                 ", \"light_override\":" + str(self.light_override) + 
                 ", \"mode\":" + str(self.mode) + 
                 ", \"auto\":" + str(self.auto) + 
-                ", \"water\":" + str(water_level) + 
                 ", \"heater\":" + str(self.get_heater) + ", \"fan\":" + str(self.get_fan) + "}}}", qos=1)
             print("msg sent: temperature  %.2f; humidity %.2f" % (self.temperature, self.humidity))
         else:
             print("Failed to read sensor")
-            # publish a message saying sensor isn't working
-
-# network settings
-connflag = False
-def on_connect(client, userdata, flags, rc):
-    global connflag, tiers
-    connflag = True
-    print("Connection returned result: " + str(rc) )
-    for tier in tiers:
-        mqttc.subscribe(tier.name + "/led" , 1 )
-        mqttc.subscribe(tier.name + "/profile", 1)
-        mqttc.subscribe(tier.name + "/schedule", 1)
-        mqttc.subscribe(tier.name + "/auto", 1)
-        mqttc.subscribe(tier.name + "/change_light", 1)
-        mqttc.subscribe(tier.name + "/light_override", 1)
-        mqttc.subscribe("$aws/things/" + tier.name + "/shadow/get/accepted")
-        # mqttc.subscribe("$aws/things/" + thingName + "/shadow/update/delta")
-        # mqttc.subscribe("$aws/things/" + thingName + "/shadow/update/documents", 1)
-
-def on_message(mosq, obj, msg):
-    global tiers
-    try:
-        print("Topic: "+msg.topic)
-        print("Payload: "+str(msg.payload))
-        payload = ast.literal_eval(msg.payload)
-        for tier in tiers:
-            if (msg.topic == "$aws/things/" + tier.name + "/shadow/update/delta"):
-                # resolve_deltas(json.loads(msg.payload))
-                pass
-            # if (msg.topic == "$aws/things/" + thingName + "/shadow/get/accepted"):
-            #     resolve_deltas(json.loads(msg.payload))
-            #     return
-            
-            elif (msg.topic == tier.name + "/led"):
-                tier.led_toggle(payload)
-            elif (msg.topic == tier.name + "/profile"):
-                tier.add_profile(payload)
-            elif (msg.topic == tier.name + "/schedule"):
-                tier.change_schedule(payload)
-            elif (msg.topic == tier.name + "/auto"):
-                tier.set_auto(payload)
-            elif (msg.topic == tier.name + "/change_light"):
-                tier.change_light(payload)
-            elif (msg.topic == tier.name + "/light_override"):
-                tier.light_override = payload
-    except (ValueError, TypeError, SyntaxError, RuntimeError):
-        print("Bad Message")
-
-def on_disconnect(client, userdata, rc):
-    global connflag
-    connflag = False
-    print("DISCONNECTED")
-
-def init_mqtt():
-    # Initiate MQTT Client
-    mqttc = mqtt.Client()
-    # Assign event callbacks
-    mqttc.on_message = on_message
-    mqttc.on_connect = on_connect
-    mqttc.on_disconnect = on_disconnect
-    # Configure TLS Set
-    mqttc.tls_set(CA_ROOT_CERT_FILE, certfile=THING_CERT_FILE, keyfile=THING_PRIVATE_KEY, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
-    # Connect with MQTT Broker
-    mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
-    # Continue monitoring the incoming messages for subscribed topic
-    mqttc.loop_start()
-    return mqttc
+            # Publish a message saying sensor isn't working
 
 if __name__ == '__main__':
-    tier1 = Tier(thingName, light=light_pwm,fan=fan_pwm,heater=heater_pwm,exhaust=exhaust_pwm)
-    tiers.append(tier1)
-    mqttc = init_mqtt()
+    tiers = [None for x in range(num_tiers)]
+    for i in range(num_tiers):
+        tiers[i] = Tier('pi6.'+str(i+1), DHT_PINS[i], light=light_pwm[i],fan=fan_pwm[i],heater=heater_pwm[i],exhaust=exhaust_pwm[i])
+    mqttc = client.Client(tiers)
     while True:
-        if connflag = False:
+        if mqttc.connflag == False:
             mqttc.reconnect
         for tier in tiers:
             tier.big_loop()
-            tier.update_cloud
+            tier.update_cloud()
     GPIO.cleanup()
     mqttc.disconnect()
