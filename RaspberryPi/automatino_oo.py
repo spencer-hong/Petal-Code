@@ -5,18 +5,17 @@
 
 # TODO: change it so that most up to date temp,hum is sent every x seconds and in the background data is being polled
 # TODO: change the publish function so that if it cant publish it doesnt fail. overwrite method in client.py
+# GPIO.input(pin) - digital read
 
 import paho.mqtt.client as mqtt
 import AWSIoTPythonSDK
 import os
+import sys
 import socket
-import ssl
-import RPi.GPIO as GPIO
 import string
 import Adafruit_DHT
 import time
 import datetime
-import ast
 import json
 import atexit
 from time import sleep
@@ -24,68 +23,14 @@ from random import uniform
 from pytz import timezone
 import client
 import time
+import pin_setup
+from pin_setup import *
 
-MQTT_PORT = 8883
-MQTT_KEEPALIVE_INTERVAL = 45
-MQTT_HOST = "a3nxzzc72rdj05.iot.us-east-2.amazonaws.com"
-CA_ROOT_CERT_FILE = "aws-iot-rootCA.crt"
-THING_CERT_FILE = "cert.pem"
-THING_PRIVATE_KEY = "privkey.pem"
-
-timer = 0
-box_type = 'styro'
-num_tiers = 1
-
-# RPi zeroW has 26 GPIO pins, 2...27
-
-LIGHT_PINS = [14,15,18,23,24]
-FAN_PINS = [25,8,7,12,16]
-EXHAUST_PINS = [20,21,26,19,13] # RXD
-HEAT_PINS = [6,5,11,9,10]
-DHT_PINS = [22,27,17,4,3]
-
-if box_type != 'styro':
-	VALVE_PIN = 23
-	HIGH_WATER_PIN = 16
-	MEDIUM_WATER_PIN = 20
-	TRAY_LEVEL_PIN = 21
-	GPIO.setup(VALVE_PIN, GPIO.OUT)
-	GPIO.output(VALVE_PIN, False)
-	GPIO.setup(TRAY_LEVEL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.setup(HIGH_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.setup(MEDIUM_WATER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-# initialize GPIO
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.cleanup()
-light_pwm = fan_pwm = heater_pwm = exhaust_pwm = [None for x in range(num_tiers)]
-for i in range(num_tiers):
-	GPIO.setup(LIGHT_PINS[i], GPIO.OUT)
-	GPIO.setup(FAN_PINS[i], GPIO.OUT)
-	GPIO.setup(HEAT_PINS[i], GPIO.OUT)
-	GPIO.setup(EXHAUST_PINS[i], GPIO.OUT)
-	GPIO.output(LIGHT_PINS[i], False)
-	GPIO.output(FAN_PINS[i], False)
-	GPIO.output(HEAT_PINS[i], False)
-	GPIO.output(EXHAUST_PIN[i], False)
-	light_pwm[i] = GPIO.PWM(LIGHT_PINS[i], 100)
-	light_pwm[i].start(0)
-	fan_pwm[i] = GPIO.PWM(FAN_PINS[i], 100);
-	fan_pwm[i].start(0)
-	heater_pwm[i] = GPIO.PWM(HEAT_PIN[i], 100);
-	heater_pwm[i].start(0)
-	exhaust_pwm[i] = GPIO.PWM(EXHAUST_PIN[i], 100);
-	exhaust_pwm[i].start(0)
-
-# Some sick methods
 def digital_write(pin, val):
 	if (val >= 1 or val == True or val == "HIGH"):
 		GPIO.output(pin, True)
 	else:
 		GPIO.output(pin, False)
-
-# GPIO.input(pin)
 
 def set_pwm(pwm_object, val):
 	pwm_object.ChangeDutyCycle(val)
@@ -104,14 +49,13 @@ def led_toggle(payload):
 		analog_write(light_pwm, 0)
 
 def get_time():
-	# time = str(datetime.datetime.now(timezone('US/Eastern')).time())
-	# time = time[0:2] + time[3:5]
-	# return time
-	return time.time()
+	time = str(datetime.datetime.now(timezone('US/Eastern')).time())
+	time = time[0:2] + time[3:5]
+	return time
 
-# Return true if time1 is before (or equal to) time2
-# Inputs time1 and time2 are strings
 def before(time1, time2):
+	""" Return true if time1 is before (or equal to) time2
+	Inputs time1 and time2 are strings """
 	hr1 = int(time1[0:2])
 	min1 = int(time1[2:4])
 	hr2 = int(time2[0:2])
@@ -136,11 +80,12 @@ def reservoir_update():
 	else:
 		return 0
 
-class Tier(object):
-	def __init__(self, name, dht_pin, fan=None,light=None,heater=None,exhaust=None,blue=0,buffer_val=0.5,light_override=0,fan_override=0,heater_override=0,blue_override=0,auto=1,valve=0,mode=0):
+class Tier():
+	def __init__(self,name,dht_pin,fan=None,light=None,heater=None,exhaust=None,blue=0,buffer_val=0.5,light_override=0,fan_override=0,heater_override=0,blue_override=0,auto=1,valve=None,mode=0):
 		self.name = name
 		self.temperature = None
 		self.humidity = None
+		self.dict = {}
 		self.blue,self.light_override,self.heater_override,self.blue_override = blue,light_override,heater_override,blue_override   
 		self.light, self.fan, self.heater, self.exhaust = light, fan, heater, exhaust
 		self.buffer_val,self.auto,self.valve,self.mode= buffer_val,auto,valve,mode
@@ -150,34 +95,38 @@ class Tier(object):
 			{'name': 'night','temperatureSP': 19, 'humiditySP': 50, 'light': 0, 'blue': 0},
 			{'name': 'germ','temperatureSP': 24, 'humiditySP': 50, 'light': 0, 'blue': 100}
 		]
-		self.current_profile = profiles[0]
-		self.last_profile = profiles[0]
+		self.current_profile = self.last_profile = self.profiles[0]
 		self.schedule = [['day','0400'],['night','2200']]
-		self.last_update = get_time()
+		self.last_update = time.time()
 
 	def set_light(self, val):
 		self.light.ChangeDutyCycle(val)
+		self.dict['light'] = val
 
 	def get_light(self):
-		return self.light.dutycycle
+		# return self.light.dutycycle
+		return self.dict['light']
 
 	def set_fan(self, val):
 		self.fan.ChangeDutyCycle(val)
+		self.dict['fan'] = val
 
 	def get_fan(self):
-		return self.fan.dutycycle
+		return self.dict['fan']
 
 	def set_heater(self, val):
 		self.heater.ChangeDutyCycle(val)
+		self.dict['heater'] = val
 
 	def get_heater(self):
-		return self.heater.dutycycle
+		return self.dict['heater']
 
 	def set_exhaust(self, val):
 		self.exhaust.ChangeDutyCycle(val)
+		self.dict['exhaust'] = val
 
 	def get_exhaust(self):
-		return self.exhaust.dutycycle
+		return self.dict['exhaust']
 
 	def set_auto(self, val):
 		if (int(val) >= 1 or val == True or val == "HIGH"):
@@ -185,9 +134,9 @@ class Tier(object):
 		else:
 			self.auto = 0
 
-	# Add a new profile to profiles or update an existing one
-	# Input must be a valid profile (must have 'name' as a key)
 	def add_profile(self, profile):
+		""" Add a new profile to profiles or update an existing one
+		Input must be a valid profile (must have 'name' as a key) """
 		indices = [self.profiles.index(x) for x in self.profiles if x['name'] == self.profile['name']]
 		if len(indices) == 0:
 			print("adding new profile \"" + self.profile['name'] + "\": " + str(profile))
@@ -197,11 +146,11 @@ class Tier(object):
 			self.profiles[indices[0]] = profile
 		self.update_current_profile(True)
 
-	# Changes the schedule of profiles and times
-	# Input must be a schedule in the correct format
-	# Sorts the schedule according to start times of profiles
-	# Updates the current profile as well
 	def change_schedule(self, new_schedule):
+		""" Changes the schedule of profiles and times
+		Input must be a schedule in the correct format
+		Sorts the schedule according to start times of profiles
+		Updates the current profile as well """
 		if len(new_schedule) == 0:
 			print('Not a valid schedule 2')
 			return
@@ -234,9 +183,9 @@ class Tier(object):
 			self.schedule = new_schedule
 			self.update_current_profile(True)
 
-	# Check the current time to figure out what the current profile is (amongst the ones in the schedule)
-	# Don't assume schedule is sorted
 	def update_current_profile(self, arg = False):
+		""" Check the current time to figure out what the current profile is (amongst the ones in the schedule)
+		Don't assume schedule is sorted """
 		time = get_time()
 		if len(self.profiles) == 1:
 			self.current_profile = self.profiles[0]
@@ -259,7 +208,7 @@ class Tier(object):
 					# turn off the light override if we are switching schedules
 					self.light_override = 0
 					mqttc.publish(self.name + "/light_override","0", qos=1)
-				self.current_profile = profiles[indices[0]]
+				self.current_profile = self.profiles[indices[0]]
 			if arg:
 				print("current profile is \"" + str(current_profile) + "\"")
 
@@ -290,7 +239,7 @@ class Tier(object):
 				self.set_light(val)
 				self.light_override = 1
 				# Clear the delta
-				mqttc.publish("$aws/things/" + thingName + "/shadow/update",
+				mqttc.publish("$aws/things/" + self.name + "/shadow/update",
 					"{\"state\":{\"reported\":{\"light\": " + str(light) + "}}}", qos=1)
 		else:
 			print("Light value should be between 0 and 100")
@@ -302,9 +251,7 @@ class Tier(object):
 			self.change_light(val)
 
 	def get_readings(self):
-		# checks 5 times
-		humreading = None
-		tempreading = None
+		humreading, tempreading = None, None
 		reading_counter = 0
 		while (humreading is None or tempreading is None) and reading_counter < 5:
 			print("reading")
@@ -315,6 +262,7 @@ class Tier(object):
 			self.temperature = tempreading
 			return True
 		else:
+			print("Failed to get readings")
 			return False
 
 	def tray_update(self):
@@ -337,8 +285,7 @@ class Tier(object):
 		if self.valve != None:
 			self.tray_update()
 		# water_level = reservoir_update()
-		could_read = self.get_readings()
-
+		self.get_readings()
 		# Maybe only do the below things if there's a change in something?
 		if self.auto == 1:
 			self.automate()
@@ -347,29 +294,36 @@ class Tier(object):
 			pass
 
 	def update_cloud(self):
-		# check for outstanding deltas every 7.5 seconds
-		if get_time() - self.last_update > 7:
-			mqttc.publish("$aws/things/" + thingName + "/shadow/get","", qos=1)
-			self.last_update = get_time()
-
-		if self.get_readings():
-			mqttc.publish("$aws/things/" + thingName + "/shadow/update",
-				"{\"state\":{\"reported\":{\"temperature\": " + str(self.temperature) + ", \"humidity\":" + str(self.humidity) +
-				", \"tempSP\":" + str(self.current_profile['temperatureSP']) + 
-				", \"light\":" + str(self.get_light) + 
-				", \"light_override\":" + str(self.light_override) + 
-				", \"mode\":" + str(self.mode) + 
-				", \"auto\":" + str(self.auto) + 
-				", \"heater\":" + str(self.get_heater) + ", \"fan\":" + str(self.get_fan) + "}}}", qos=1)
+		if time.time() - self.last_update > 7:
+			mqttc.publish("$aws/things/" + self.name + "/shadow/get","", qos=1)
+			self.last_update = time.time()
+		mqttc.publish("$aws/things/" + self.name + "/shadow/update",
+			"{\"state\":{\"reported\":{\"temperature\": " + str(self.temperature) + ", \"humidity\":" + str(self.humidity) +
+			", \"tempSP\":" + str(self.current_profile['temperatureSP']) + 
+			", \"light\":" + str(self.get_light) + 
+			", \"light_override\":" + str(self.light_override) + 
+			", \"mode\":" + str(self.mode) + 
+			", \"auto\":" + str(self.auto) + 
+			", \"heater\":" + str(self.get_heater) + ", \"fan\":" + str(self.get_fan) + "}}}", qos=1)
+		if self.temperature is not None and self.humidity is not None:
 			print("msg sent: temperature  %.2f; humidity %.2f" % (self.temperature, self.humidity))
-		else:
-			print("Failed to read sensor")
-			# Publish a message saying sensor isn't working
 
 if __name__ == '__main__':
+	num_tiers = 1
+	water = 0
+	assert len(sys.argv), "Need 2 arguments. Arg 1: Number of tiers, must be int < 5. Arg 2: Water or not, 1 or 0"
+	assert int(sys.argv[1]) <= 5, "Arg 1: Number of tiers, must be int < 5"
+	assert int(sys.argv[2]) == 1 or int(sys.argv[2]) == 0, "Arg 2: Water or not, 1 or 0"
+	num_tiers, water = int(sys.argv[1]), int(sys.argv[2])
+	pin_setup.setup_gpios(num_tiers)
+	if water:
+		pin_setup.setup_valve()
+		pin_setup.setup_reservoir()
+	
 	tiers = [None for x in range(num_tiers)]
 	for i in range(num_tiers):
-		tiers[i] = Tier('pi6.'+str(i+1), DHT_PINS[i], light=light_pwm[i],fan=fan_pwm[i],heater=heater_pwm[i],exhaust=exhaust_pwm[i])
+		tiers[i] = Tier('pi6.'+str(i+1),pin_setup.DHT_PINS[i],light=pin_setup.light_pwm[i],fan=pin_setup.fan_pwm[i],heater=pin_setup.heater_pwm[i],exhaust=pin_setup.exhaust_pwm[i])
+	
 	mqttc = client.Client(tiers)
 	while True:
 		for tier in tiers:
@@ -378,5 +332,7 @@ if __name__ == '__main__':
 				tier.update_cloud()
 		if mqttc.connflag == False:
 			mqttc.reconnect()
+			print("connflag false, reconnecting")
+
 	GPIO.cleanup()
 	mqttc.disconnect()

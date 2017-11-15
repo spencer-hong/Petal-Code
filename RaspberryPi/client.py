@@ -1,6 +1,8 @@
 import paho.mqtt.client as mqtt
 import AWSIoTPythonSDK
-import automatino_oo.Tier
+import ssl
+import ast
+from automatino_oo import Tier
 
 MQTT_PORT = 8883
 MQTT_KEEPALIVE_INTERVAL = 45
@@ -14,12 +16,12 @@ class Client(mqtt.Client):
     def __init__(self, tiers):
         mqtt.Client.__init__(self)
         self.connflag = False
+        self.tiers = tiers
         self.tls_set(CA_ROOT_CERT_FILE, certfile=THING_CERT_FILE, keyfile=THING_PRIVATE_KEY, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
         self.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
         self.loop_start()
-        self.tiers = tiers
 
-    def on_connect(client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc):
         self.connflag = True
         print("Connection returned result: " + str(rc) )
         for tier in self.tiers:
@@ -33,7 +35,7 @@ class Client(mqtt.Client):
             # mqttc.subscribe("$aws/things/" + thingName + "/shadow/update/delta")
             # mqttc.subscribe("$aws/things/" + thingName + "/shadow/update/documents", 1)
 
-    def on_message(mosq, obj, msg):
+    def on_message(self, mosq, obj, msg):
         try:
             print("Topic: "+msg.topic)
             print("Payload: "+str(msg.payload))
@@ -61,7 +63,7 @@ class Client(mqtt.Client):
         except (ValueError, TypeError, SyntaxError, RuntimeError):
             print("Bad Message")
 
-    def on_disconnect(client, userdata, rc):
+    def on_disconnect(self, client, userdata, rc):
         self.connflag = False
         print("DISCONNECTED")
 
