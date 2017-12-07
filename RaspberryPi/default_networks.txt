@@ -1,0 +1,12 @@
+network={
+   ssid="Rev Member"
+   psk="incubator"
+}
+network={
+   ssid="Jimmy"
+   psk="211linden18"
+}
+network={
+   ssid="Jai's Phone"
+   psk="asdfghjkl"
+}

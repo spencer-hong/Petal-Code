@@ -81,7 +81,7 @@ on DEVICE\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://medium.com/a-swift-misadventure/setup-your-raspberry-pi-2-3-with-raspbian-headless-without-cables-c78309fd7045"}}{\fldrslt 
 \f4\fs28 \cf2 \kerning1\expnd0\expndtw0 https://medium.com/a-swift-misadventure/setup-your-raspberry-pi-2-3-with-raspbian-headless-without-cables-c78309fd7045}}
-\f4\fs28 \kerning1\expnd0\expndtw0 \
+\f4\fs28 \cf2 \kerning1\expnd0\expndtw0 \
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://www.hackster.io/mariocannistra/python-and-paho-for-mqtt-with-aws-iot-921e41?ref=part&ref_id=13748&offset=12"}}{\fldrslt \cf2 \cb3 \CocoaLigature0 https://www.hackster.io/mariocannistra/python-and-paho-for-mqtt-with-aws-iot-921e41?ref=part&ref_id=13748&offset=12}}
@@ -105,9 +105,7 @@ network=\{\cb1 \
 ifconfig - take down ip\
 \
 scp 
-\fs22 \cf6 \cb3 \kerning1\expnd0\expndtw0 \CocoaLigature0 -r pi6 pi@<ip>:\
-\
-
+\fs22 \cf6 \cb3 \kerning1\expnd0\expndtw0 \CocoaLigature0 -r pi6 pi@<ip>:
 \fs26 \cf2 \cb1 \expnd0\expndtw0\kerning0
 \CocoaLigature1 \
 \
@@ -126,6 +124,7 @@ sudo apt-\cf15 get\cf12  install \cf14 python\cf12 -dev \
 \pard\pardeftab720\sl360\partightenfactor0
 
 \f4\fs28 \cf7 \cb8 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 \
+\pard\pardeftab720\sl360\partightenfactor0
 
 \f1\fs26 \cf2 \cb1 \shad0 	
 \f4\fs28 \cf7 \cb8 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 sudo apt\cf9 \cb10 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 -\cf7 \cb8 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 get install python3\cf9 \cb10 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 -\cf7 \cb8 \shad\shadx0\shady-20\shadr0\shado255 \shadc2 pip\
@@ -142,7 +141,7 @@ sudo \cf14 python\cf12  setup.\cf14 py\cf12  install \
 \pard\pardeftab720\sl360\partightenfactor0
 \cf2 \cb1 \
 sudo pip install paho-mqtt
-\fs27\fsmilli13600 \
+\fs27\fsmilli13600 \cf2 \
 \
 \pard\pardeftab720\sl300\partightenfactor0
 
